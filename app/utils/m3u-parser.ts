@@ -202,12 +202,11 @@ function isStreamAccessible(channel: Channel): boolean {
     "stream.oursnetworktv.com",
     "amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv",
     "amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv",
-    "amg02159-kcglobal-amg02159c1-samsung-in-521.playouts.now.amagi.tv",
+    "amg02159-kcglobal-amg02159c1-samsung-in-521.playouts.now.amagi.tv Citroen C3",
     "live.wmncdn.net",
     "cdn-globecast.akamaized.net",
 
-    // Expanded domains with global TLDs and subdomains
-    // For pluto.tv
+    // Previously expanded domains with global TLDs and subdomains
     "www.pluto.tv",
     "api.pluto.tv",
     "cdn.pluto.tv",
@@ -241,19 +240,13 @@ function isStreamAccessible(channel: Channel): boolean {
     "plutotv.ca",
     "plutotv.in",
     "plutotv.br",
-
-    // For cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv
     "v4-service-channel-stitcher-use1-1.prd.pluto.tv",
     "stitcher-use1-1.prd.pluto.tv",
     "prd.pluto.tv",
     "api.prd.pluto.tv",
-
-    // For service-stitcher.clusters.pluto.tv
     "clusters.pluto.tv",
     "api.clusters.pluto.tv",
     "cdn.clusters.pluto.tv",
-
-    // For alkassdigital.net
     "www.alkassdigital.net",
     "api.alkassdigital.net",
     "cdn.alkassdigital.net",
@@ -264,16 +257,12 @@ function isStreamAccessible(channel: Channel): boolean {
     "alkassdigital.de",
     "alkassdigital.fr",
     "alkassdigital.qa",
-
-    // For vo-live-media.cdb.cdn.orange.com
     "cdb.cdn.orange.com",
     "live-media.cdb.cdn.orange.com",
     "api.cdn.orange.com",
     "cdn.orange.com",
     "orange.fr",
     "cdn.orange.fr",
-
-    // For dev.aftermind.xyz
     "aftermind.xyz",
     "www.aftermind.xyz",
     "api.aftermind.xyz",
@@ -282,8 +271,6 @@ function isStreamAccessible(channel: Channel): boolean {
     "aftermind.net",
     "aftermind.co",
     "aftermind.io",
-
-    // For raycom-accdn-firetv.amagi.tv
     "accdn-firetv.amagi.tv",
     "www.raycom-accdn-firetv.amagi.tv",
     "api.raycom-accdn-firetv.amagi.tv",
@@ -291,8 +278,6 @@ function isStreamAccessible(channel: Channel): boolean {
     "www.amagi.tv",
     "amagi.com",
     "amagi.net",
-
-    // For bl.webcaster.pro
     "webcaster.pro",
     "www.webcaster.pro",
     "api.webcaster.pro",
@@ -300,8 +285,6 @@ function isStreamAccessible(channel: Channel): boolean {
     "webcaster.com",
     "webcaster.net",
     "webcaster.co",
-
-    // For webstreaming.viewmedia.tv
     "viewmedia.tv",
     "www.viewmedia.tv",
     "api.viewmedia.tv",
@@ -309,16 +292,12 @@ function isStreamAccessible(channel: Channel): boolean {
     "viewmedia.com",
     "viewmedia.net",
     "viewmedia.co",
-
-    // For aasthaott.akamaized.net
     "akamaized.net",
     "www.aasthaott.akamaized.net",
     "api.aasthaott.akamaized.net",
     "aasthaott.com",
     "aasthaott.in",
     "aasthaott.net",
-
-    // For live20.bozztv.com
     "bozztv.com",
     "www.bozztv.com",
     "api.bozztv.com",
@@ -327,16 +306,12 @@ function isStreamAccessible(channel: Channel): boolean {
     "bozztv.co",
     "bozztv.tv",
     "bozztv.uk",
-
-    // For tv.cdn.xsg.ge
     "xsg.ge",
     "cdn.xsg.ge",
     "www.xsg.ge",
     "api.xsg.ge",
     "xsg.com",
     "xsg.net",
-
-    // For stream.oursnetworktv.com
     "oursnetworktv.com",
     "www.oursnetworktv.com",
     "api.oursnetworktv.com",
@@ -345,42 +320,108 @@ function isStreamAccessible(channel: Channel): boolean {
     "oursnetworktv.tv",
     "oursnetworktv.co",
     "oursnetworktv.uk",
-
-    // For amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv
     "9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv",
     "api.amg01281-9xmediapvtltd-9xjhakaas-samsungin-ci2cs.amagi.tv",
     "9xmediapvtltd.amagi.tv",
     "amagi.in",
-
-    // For amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv
     "9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv",
     "api.amg01281-9xmediapvtltd-9xtashan-samsungin-xz1sd.amagi.tv",
-
-    // For amg02159-kcglobal-amg02159c1-samsung-in-521.playouts.now.amagi.tv
     "kcglobal-amg02159c1-samsung-in-521.playouts.now.amagi.tv",
     "playouts.now.amagi.tv",
     "api.playouts.now.amagi.tv",
     "now.amagi.tv",
     "kcglobal.amagi.tv",
-
-    // For live.wmncdn.net
     "wmncdn.net",
     "www.wmncdn.net",
     "api.wmncdn.net",
     "cdn.wmncdn.net",
     "wmncdn.com",
     "wmncdn.co",
-
-    // For cdn-globecast.akamaized.net
     "globecast.akamaized.net",
     "www.cdn-globecast.akamaized.net",
     "api.cdn-globecast.akamaized.net",
     "globecast.com",
     "globecast.net",
     "globecast.fr",
-    "cdn.globecast.com",
-  ];
 
+    // Domains from error logs
+    "livetv.mylifeisgood.net.ru",
+    "mtlivestream.site",
+    "www.btvlive.gov.bd",
+    // Variations for livetv.mylifeisgood.net.ru
+    "mylifeisgood.net.ru",
+    "www.mylifeisgood.net.ru",
+    "api.mylifeisgood.net.ru",
+    "cdn.mylifeisgood.net.ru",
+    "mylifeisgood.com",
+    "mylifeisgood.net",
+    "mylifeisgood.org",
+    "mylifeisgood.co",
+    "mylifeisgood.ru",
+    "mylifeisgood.uk",
+    "mylifeisgood.de",
+    "mylifeisgood.fr",
+    // Variations for mtlivestream.site
+    "www.mtlivestream.site",
+    "api.mtlivestream.site",
+    "cdn.mtlivestream.site",
+    "mtlivestream.com",
+    "mtlivestream.net",
+    "mtlivestream.org",
+    "mtlivestream.co",
+    "mtlivestream.tv",
+    "mtlivestream.asia",
+    // Variations for btvlive.gov.bd
+    "btvlive.gov.bd",
+    "api.btvlive.gov.bd",
+    "cdn.btvlive.gov.bd",
+    "btvlive.bd",
+    "btvlive.com",
+    "btvlive.net",
+    "btvlive.org",
+
+    // Additional IPTV-related domains
+    "iptv-org.github.io",
+    "www.iptv-org.github.io",
+    "api.iptv-org.github.io",
+    "iptv.com",
+    "www.iptv.com",
+    "api.iptv.com",
+    "cdn.iptv.com",
+    "iptv.net",
+    "iptv.org",
+    "iptv.co",
+    "iptv.io",
+    "iptv.tv",
+    "iptv.uk",
+    "iptv.de",
+    "iptv.fr",
+    "iptv.jp",
+    "iptv.au",
+    "iptv.ca",
+    "iptv.in",
+    "iptv.br",
+    "magistv.com",
+    "www.magistv.com",
+    "api.magistv.com",
+    "cdn.magistv.com",
+    "magistv.net",
+    "magistv.org",
+    "magistv.co",
+    "magistv.tv",
+    "magistv.la",
+    "magistv.mx",
+    "magistv.app",
+    "magistv.live",
+    "apsattv.com",
+    "www.apsattv.com",
+    "api.apsattv.com",
+    "cdn.apsattv.com",
+    "apsattv.net",
+    "apsattv.org",
+    "apsattv.co",
+    "apsattv.tv",
+  ];
   // Check if URL contains any CORS-restricted domains
   const hasCorsRestriction = corsRestrictedDomains.some((domain) =>
     url.includes(domain)
