@@ -421,6 +421,7 @@ function isStreamAccessible(channel: Channel): boolean {
     "apsattv.org",
     "apsattv.co",
     "apsattv.tv",
+    "bloomberg.com"
   ];
   // Check if URL contains any CORS-restricted domains
   const hasCorsRestriction = corsRestrictedDomains.some((domain) =>
