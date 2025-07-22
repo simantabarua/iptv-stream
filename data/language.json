@@ -1,0 +1,507 @@
+[
+    {
+      "language_name": "Undefined",
+      "channels": 2256,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/undefined.m3u"
+    },
+    {
+      "language_name": "English",
+      "channels": 2313,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/eng.m3u"
+    },
+    {
+      "language_name": "Spanish",
+      "channels": 1704,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/spa.m3u"
+    },
+    {
+      "language_name": "French",
+      "channels": 455,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/fra.m3u"
+    },
+    {
+      "language_name": "Arabic",
+      "channels": 427,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ara.m3u"
+    },
+    {
+      "language_name": "Italian",
+      "channels": 346,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ita.m3u"
+    },
+    {
+      "language_name": "Russian",
+      "channels": 342,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/rus.m3u"
+    },
+    {
+      "language_name": "German",
+      "channels": 323,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/deu.m3u"
+    },
+    {
+      "language_name": "Turkish",
+      "channels": 259,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tur.m3u"
+    },
+    {
+      "language_name": "Series",
+      "channels": 257,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/series.m3u"
+    },
+    {
+      "language_name": "Portuguese",
+      "channels": 256,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/por.m3u"
+    },
+    {
+      "language_name": "Chinese",
+      "channels": 218,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/zho.m3u"
+    },
+    {
+      "language_name": "Dutch",
+      "channels": 183,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/nld.m3u"
+    },
+    {
+      "language_name": "Persian",
+      "channels": 163,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/fas.m3u"
+    },
+    {
+      "language_name": "Hindi",
+      "channels": 134,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/hin.m3u"
+    },
+    {
+      "language_name": "Indonesian",
+      "channels": 131,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ind.m3u"
+    },
+    {
+      "language_name": "Romanian",
+      "channels": 130,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ron.m3u"
+    },
+    {
+      "language_name": "Hungarian",
+      "channels": 106,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/hun.m3u"
+    },
+    {
+      "language_name": "Korean",
+      "channels": 96,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kor.m3u"
+    },
+    {
+      "language_name": "Thai",
+      "channels": 74,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tha.m3u"
+    },
+    {
+      "language_name": "Vietnamese",
+      "channels": 69,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/vie.m3u"
+    },
+    {
+      "language_name": "Malayalam",
+      "channels": 67,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mal.m3u"
+    },
+    {
+      "language_name": "Polish",
+      "channels": 65,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/pol.m3u"
+    },
+    {
+      "language_name": "Ukrainian",
+      "channels": 61,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ukr.m3u"
+    },
+    {
+      "language_name": "Tamil",
+      "channels": 53,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tam.m3u"
+    },
+    {
+      "language_name": "Serbian",
+      "channels": 52,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/srp.m3u"
+    },
+    {
+      "language_name": "Slovak",
+      "channels": 49,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/slk.m3u"
+    },
+    {
+      "language_name": "Urdu",
+      "channels": 46,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/urd.m3u"
+    },
+    {
+      "language_name": "Czech",
+      "channels": 41,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ces.m3u"
+    },
+    {
+      "language_name": "Bengali",
+      "channels": 32,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ben.m3u"
+    },
+    {
+      "language_name": "Kurdish",
+      "channels": 32,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kur.m3u"
+    },
+    {
+      "language_name": "Armenian",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/hye.m3u"
+    },
+    {
+      "language_name": "Kazakh",
+      "channels": 27,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kaz.m3u"
+    },
+    {
+      "language_name": "Mongolian",
+      "channels": 26,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mon.m3u"
+    },
+    {
+      "language_name": "Panjabi",
+      "channels": 26,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/pan.m3u"
+    },
+    {
+      "language_name": "Pashto",
+      "channels": 26,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/pus.m3u"
+    },
+    {
+      "language_name": "Uzbek",
+      "channels": 24,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/uzb.m3u"
+    },
+    {
+      "language_name": "Khmer",
+      "channels": 23,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/khm.m3u"
+    },
+    {
+      "language_name": "Finnish",
+      "channels": 20,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/fin.m3u"
+    },
+    {
+      "language_name": "Swahili",
+      "channels": 19,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/swa.m3u"
+    },
+    {
+      "language_name": "Dari (Parsi)",
+      "channels": 18,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/prd.m3u"
+    },
+    {
+      "language_name": "Malay",
+      "channels": 18,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/msa.m3u"
+    },
+    {
+      "language_name": "Azerbaijani",
+      "channels": 17,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/aze.m3u"
+    },
+    {
+      "language_name": "Papiamento",
+      "channels": 17,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/pap.m3u"
+    },
+    {
+      "language_name": "Tajik",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tgk.m3u"
+    },
+    {
+      "language_name": "Bosnian",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/bos.m3u"
+    },
+    {
+      "language_name": "Slovenian",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/slv.m3u"
+    },
+    {
+      "language_name": "Danish",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/dan.m3u"
+    },
+    {
+      "language_name": "Hebrew",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/heb.m3u"
+    },
+    {
+      "language_name": "Japanese",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/jpn.m3u"
+    },
+    {
+      "language_name": "Somali",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/som.m3u"
+    },
+    {
+      "language_name": "Swedish",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/swe.m3u"
+    },
+    {
+      "language_name": "Galician",
+      "channels": 13,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/glg.m3u"
+    },
+    {
+      "language_name": "Kirghiz",
+      "channels": 13,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kir.m3u"
+    },
+    {
+      "language_name": "Wolof",
+      "channels": 13,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/wol.m3u"
+    },
+    {
+      "language_name": "Letzeburgesch",
+      "channels": 12,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ltz.m3u"
+    },
+    {
+      "language_name": "Burmese",
+      "channels": 11,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mya.m3u"
+    },
+    {
+      "language_name": "Kannada",
+      "channels": 11,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kan.m3u"
+    },
+    {
+      "language_name": "Telugu",
+      "channels": 10,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tel.m3u"
+    },
+    {
+      "language_name": "Dhivehi",
+      "channels": 10,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/div.m3u"
+    },
+    {
+      "language_name": "Estonian",
+      "channels": 10,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/est.m3u"
+    },
+    {
+      "language_name": "Norwegian",
+      "channels": 9,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/nor.m3u"
+    },
+    {
+      "language_name": "Marathi",
+      "channels": 9,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mar.m3u"
+    },
+    {
+      "language_name": "Kinyarwanda",
+      "channels": 9,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kin.m3u"
+    },
+    {
+      "language_name": "Amharic",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/amh.m3u"
+    },
+    {
+      "language_name": "Basque",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/eus.m3u"
+    },
+    {
+      "language_name": "Lao",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/lao.m3u"
+    },
+    {
+      "language_name": "Latvian",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/lav.m3u"
+    },
+    {
+      "language_name": "Turkmen",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tuk.m3u"
+    },
+    {
+      "language_name": "Assamese",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/asm.m3u"
+    },
+    {
+      "language_name": "Lithuanian",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/lit.m3u"
+    },
+    {
+      "language_name": "Maltese",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mlt.m3u"
+    },
+    {
+      "language_name": "Oriya (macrolanguage)",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ori.m3u"
+    },
+    {
+      "language_name": "Gujarati",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/guj.m3u"
+    },
+    {
+      "language_name": "Haitian",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/hat.m3u"
+    },
+    {
+      "language_name": "Bambara",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/bam.m3u"
+    },
+    {
+      "language_name": "Ganda",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/lug.m3u"
+    },
+    {
+      "language_name": "Icelandic",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/isl.m3u"
+    },
+    {
+      "language_name": "Irish",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/gle.m3u"
+    },
+    {
+      "language_name": "Lingala",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/lin.m3u"
+    },
+    {
+      "language_name": "Mandarin Chinese",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/cmn.m3u"
+    },
+    {
+      "language_name": "Yue Chinese",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/yue.m3u"
+    },
+    {
+      "language_name": "Belarusian",
+      "channels": 4,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/bel.m3u"
+    },
+    {
+      "language_name": "Nepali",
+      "channels": 4,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/nep.m3u"
+    },
+    {
+      "language_name": "Pulaar",
+      "channels": 4,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/fuc.m3u"
+    },
+    {
+      "language_name": "Sinhala",
+      "channels": 4,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/sin.m3u"
+    },
+    {
+      "language_name": "Tagalog",
+      "channels": 4,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/tgl.m3u"
+    },
+    {
+      "language_name": "Afrikaans",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/afr.m3u"
+    },
+    {
+      "language_name": "Faroese",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/fao.m3u"
+    },
+    {
+      "language_name": "Fon",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/fon.m3u"
+    },
+    {
+      "language_name": "Gikuyu",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/kik.m3u"
+    },
+    {
+      "language_name": "Hausa",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/hau.m3u"
+    },
+    {
+      "language_name": "Javanese",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/jav.m3u"
+    },
+    {
+      "language_name": "Morisyen",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mfe.m3u"
+    },
+    {
+      "language_name": "Uighur",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/uig.m3u"
+    },
+    {
+      "language_name": "Bulgarian",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/bul.m3u"
+    },
+    {
+      "language_name": "Croatian",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/hrv.m3u"
+    },
+    {
+      "language_name": "Albanian",
+      "channels": 66,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/sqi.m3u"
+    },
+    {
+      "language_name": "Greek",
+      "channels": 128,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/ell.m3u"
+    },
+    {
+      "language_name": "Catalan",
+      "channels": 52,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/cat.m3u"
+    },
+    {
+      "language_name": "Macedonian",
+      "channels": 34,
+      "playlist_url": "https://iptv-org.github.io/iptv/languages/mkd.m3u"
+    }
+  ]

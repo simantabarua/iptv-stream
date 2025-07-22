@@ -1,0 +1,17 @@
+{
+
+  "main_playlist": "https://iptv-org.github.io/iptv/index.m3u",
+
+  "grouped_by": {
+
+    "region": "https://iptv-org.github.io/iptv/index.region.m3u",
+
+    "country": "https://iptv-org.github.io/iptv/index.country.m3u",
+
+    "language": "https://iptv-org.github.io/iptv/index.language.m3u",
+
+    "category": "https://iptv-org.github.io/iptv/index.category.m3u"
+
+  }
+
+}

@@ -1,0 +1,187 @@
+ [
+    {
+      "region_name": "Europe, the Middle East and Africa",
+      "channels": 4090,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/emea.m3u"
+    },
+    {
+      "region_name": "Americas",
+      "channels": 3211,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/amer.m3u"
+    },
+    {
+      "region_name": "Europe",
+      "channels": 3145,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/eur.m3u"
+    },
+    {
+      "region_name": "North America",
+      "channels": 2523,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/noram.m3u"
+    },
+    {
+      "region_name": "Asia",
+      "channels": 2314,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/asia.m3u"
+    },
+    {
+      "region_name": "Undefined",
+      "channels": 2256,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/undefined.m3u"
+    },
+    {
+      "region_name": "European Union",
+      "channels": 2086,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/eu.m3u"
+    },
+    {
+      "region_name": "Northern America",
+      "channels": 1675,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/nam.m3u"
+    },
+    {
+      "region_name": "Latin America and the Caribbean",
+      "channels": 1580,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/lac.m3u"
+    },
+    {
+      "region_name": "Latin America",
+      "channels": 1539,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/latam.m3u"
+    },
+    {
+      "region_name": "Hispanic America",
+      "channels": 1299,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/hispam.m3u"
+    },
+    {
+      "region_name": "Asia-Pacific",
+      "channels": 1195,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/apac.m3u"
+    },
+    {
+      "region_name": "Southern Europe",
+      "channels": 1153,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/ser.m3u"
+    },
+    {
+      "region_name": "Central and Eastern Europe",
+      "channels": 1038,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/cee.m3u"
+    },
+    {
+      "region_name": "Western Europe",
+      "channels": 969,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/wer.m3u"
+    },
+    {
+      "region_name": "Middle East and North Africa",
+      "channels": 900,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/mena.m3u"
+    },
+    {
+      "region_name": "Middle East",
+      "channels": 863,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/mideast.m3u"
+    },
+    {
+      "region_name": "South America",
+      "channels": 778,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/southam.m3u"
+    },
+    {
+      "region_name": "Balkan",
+      "channels": 742,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/balkan.m3u"
+    },
+    {
+      "region_name": "Africa",
+      "channels": 552,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/afr.m3u"
+    },
+    {
+      "region_name": "Sub-Saharan Africa",
+      "channels": 483,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/ssa.m3u"
+    },
+    {
+      "region_name": "Commonwealth of Independent States",
+      "channels": 451,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/cis.m3u"
+    },
+    {
+      "region_name": "South Asia",
+      "channels": 441,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/sas.m3u"
+    },
+    {
+      "region_name": "Arab world",
+      "channels": 436,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/arab.m3u"
+    },
+    {
+      "region_name": "Caribbean",
+      "channels": 390,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/carib.m3u"
+    },
+    {
+      "region_name": "Central America",
+      "channels": 384,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/cenamer.m3u"
+    },
+    {
+      "region_name": "Association of Southeast Asian Nations",
+      "channels": 368,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/asean.m3u"
+    },
+    {
+      "region_name": "Southeast Asia",
+      "channels": 368,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/sea.m3u"
+    },
+    {
+      "region_name": "West Africa",
+      "channels": 285,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/wafr.m3u"
+    },
+    {
+      "region_name": "Benelux",
+      "channels": 250,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/benelux.m3u"
+    },
+    {
+      "region_name": "Gulf Cooperation Council",
+      "channels": 171,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/gcc.m3u"
+    },
+    {
+      "region_name": "Northern Europe",
+      "channels": 149,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/neur.m3u"
+    },
+    {
+      "region_name": "Central Asia",
+      "channels": 130,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/cas.m3u"
+    },
+    {
+      "region_name": "Nordics",
+      "channels": 112,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/nord.m3u"
+    },
+    {
+      "region_name": "Maghreb",
+      "channels": 110,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/maghreb.m3u"
+    },
+    {
+      "region_name": "Oceania",
+      "channels": 90,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/oce.m3u"
+    },
+    {
+      "region_name": "Worldwide",
+      "channels": 60,
+      "playlist_url": "https://iptv-org.github.io/iptv/regions/int.m3u"
+    }
+  ]

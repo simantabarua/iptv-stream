@@ -1,0 +1,147 @@
+[
+  {
+    "category": "Animation",
+    "channels": 45,
+    "playlist": "https://iptv-org.github.io/iptv/categories/animation.m3u"
+  },
+  {
+    "category": "Auto",
+    "channels": 18,
+    "playlist": "https://iptv-org.github.io/iptv/categories/auto.m3u"
+  },
+  {
+    "category": "Business",
+    "channels": 67,
+    "playlist": "https://iptv-org.github.io/iptv/categories/business.m3u"
+  },
+  {
+    "category": "Classic",
+    "channels": 43,
+    "playlist": "https://iptv-org.github.io/iptv/categories/classic.m3u"
+  },
+  {
+    "category": "Comedy",
+    "channels": 81,
+    "playlist": "https://iptv-org.github.io/iptv/categories/comedy.m3u"
+  },
+  {
+    "category": "Cooking",
+    "channels": 30,
+    "playlist": "https://iptv-org.github.io/iptv/categories/cooking.m3u"
+  },
+  {
+    "category": "Culture",
+    "channels": 165,
+    "playlist": "https://iptv-org.github.io/iptv/categories/culture.m3u"
+  },
+  {
+    "category": "Documentary",
+    "channels": 115,
+    "playlist": "https://iptv-org.github.io/iptv/categories/documentary.m3u"
+  },
+  {
+    "category": "Education",
+    "channels": 164,
+    "playlist": "https://iptv-org.github.io/iptv/categories/education.m3u"
+  },
+  {
+    "category": "Entertainment",
+    "channels": 567,
+    "playlist": "https://iptv-org.github.io/iptv/categories/entertainment.m3u"
+  },
+  {
+    "category": "Family",
+    "channels": 50,
+    "playlist": "https://iptv-org.github.io/iptv/categories/family.m3u"
+  },
+  {
+    "category": "General",
+    "channels": 2291,
+    "playlist": "https://iptv-org.github.io/iptv/categories/general.m3u"
+  },
+  {
+    "category": "Kids",
+    "channels": 256,
+    "playlist": "https://iptv-org.github.io/iptv/categories/kids.m3u"
+  },
+  {
+    "category": "Legislative",
+    "channels": 190,
+    "playlist": "https://iptv-org.github.io/iptv/categories/legislative.m3u"
+  },
+  {
+    "category": "Lifestyle",
+    "channels": 98,
+    "playlist": "https://iptv-org.github.io/iptv/categories/lifestyle.m3u"
+  },
+  {
+    "category": "Movies",
+    "channels": 311,
+    "playlist": "https://iptv-org.github.io/iptv/categories/movies.m3u"
+  },
+  {
+    "category": "Music",
+    "channels": 621,
+    "playlist": "https://iptv-org.github.io/iptv/categories/music.m3u"
+  },
+  {
+    "category": "News",
+    "channels": 788,
+    "playlist": "https://iptv-org.github.io/iptv/categories/news.m3u"
+  },
+  {
+    "category": "Outdoor",
+    "channels": 49,
+    "playlist": "https://iptv-org.github.io/iptv/categories/outdoor.m3u"
+  },
+  {
+    "category": "Relax",
+    "channels": 3,
+    "playlist": "https://iptv-org.github.io/iptv/categories/relax.m3u"
+  },
+  {
+    "category": "Religious",
+    "channels": 704,
+    "playlist": "https://iptv-org.github.io/iptv/categories/religious.m3u"
+  },
+  {
+    "category": "Science",
+    "channels": 26,
+    "playlist": "https://iptv-org.github.io/iptv/categories/science.m3u"
+  },
+  {
+    "category": "Series",
+    "channels": 257,
+    "playlist": "https://iptv-org.github.io/iptv/categories/series.m3u"
+  },
+  {
+    "category": "Shop",
+    "channels": 88,
+    "playlist": "https://iptv-org.github.io/iptv/categories/shop.m3u"
+  },
+  {
+    "category": "Sports",
+    "channels": 291,
+    "playlist": "https://iptv-org.github.io/iptv/categories/sports.m3u"
+  },
+  {
+    "category": "Travel",
+    "channels": 43,
+    "playlist": "https://iptv-org.github.io/iptv/categories/travel.m3u"
+  },
+  {
+    "category": "Weather",
+    "channels": 15,
+    "playlist": "https://iptv-org.github.io/iptv/categories/weather.m3u"
+  },
+  {
+    "category": "XXX",
+    "channels": 0,
+    "playlist": "https://iptv-org.github.io/iptv/categories/xxx.m3u"
+  },
+  {
+    "category": "Undefined",
+    "channels": 3737,
+    "playlist": "https://iptv-org.github.io/iptv/categories/undefined.m3u"
+  }
+]

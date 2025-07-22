@@ -1,0 +1,1764 @@
+[
+    {
+      "name": "United States",
+      "flag": "🇺🇸",
+      "channels": 1517,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/us.m3u",
+      "subdivisions": [
+        {
+          "name": "California",
+          "channels": 148,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/us-ca.m3u"
+        },
+        {
+          "name": "Florida",
+          "channels": 50,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/us-fl.m3u"
+        },
+        {
+          "name": "Missouri",
+          "channels": 28,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/us-mo.m3u"
+        },
+        {
+          "name": "New York",
+          "channels": 22,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/us-ny.m3u"
+        },
+        {
+          "name": "Texas",
+          "channels": 21,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/us-tx.m3u"
+        },
+        {
+          "name": "Connecticut",
+          "channels": 20,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/us-ct.m3u"
+        }
+      ]
+    },
+    {
+      "name": "Italy",
+      "flag": "🇮🇹",
+      "channels": 389,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/it.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Spain",
+      "flag": "🇪🇸",
+      "channels": 378,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/es.m3u",
+      "subdivisions": [
+        {
+          "name": "Andalucia",
+          "channels": 40,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/es-an.m3u"
+        },
+        {
+          "name": "Catalunya",
+          "channels": 37,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/es-ct.m3u"
+        },
+        {
+          "name": "Valenciana, Comunidad",
+          "channels": 16,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/es-vc.m3u"
+        }
+      ]
+    },
+    {
+      "name": "India",
+      "flag": "🇮🇳",
+      "channels": 329,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/in.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Germany",
+      "flag": "🇩🇪",
+      "channels": 309,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/de.m3u",
+      "subdivisions": [
+        {
+          "name": "Nordrhein-Westfalen",
+          "channels": 11,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/de-nw.m3u"
+        }
+      ]
+    },
+    {
+      "name": "Russia",
+      "flag": "🇷🇺",
+      "channels": 296,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ru.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Turkiye",
+      "flag": "🇹🇷",
+      "channels": 288,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Dominican Republic",
+      "flag": "🇩🇴",
+      "channels": 276,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/do.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mexico",
+      "flag": "🇲🇽",
+      "channels": 272,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mx.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "United Kingdom",
+      "flag": "🇬🇧",
+      "channels": 235,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/uk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Brazil",
+      "flag": "🇧🇷",
+      "channels": 221,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/br.m3u",
+      "subdivisions": [
+        {
+          "name": "Sao Paulo",
+          "channels": 18,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/br-sp.m3u"
+        },
+        {
+          "name": "Minas Gerais",
+          "channels": 5,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/br-mg.m3u"
+        }
+      ]
+    },
+    {
+      "name": "France",
+      "flag": "🇫🇷",
+      "channels": 220,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/fr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Netherlands",
+      "flag": "🇳🇱",
+      "channels": 201,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/nl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Canada",
+      "flag": "🇨🇦",
+      "channels": 174,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ca.m3u",
+      "subdivisions": [
+        {
+          "name": "Quebec",
+          "channels": 15,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/ca-qc.m3u"
+        },
+        {
+          "name": "Ontario",
+          "channels": 7,
+          "playlist_url": "https://iptv-org.github.io/iptv/subdivisions/ca-on.m3u"
+        }
+      ]
+    },
+    {
+      "name": "China",
+      "flag": "🇨🇳",
+      "channels": 174,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Honduras",
+      "flag": "🇭🇳",
+      "channels": 164,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/hn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Greece",
+      "flag": "🇬🇷",
+      "channels": 162,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guatemala",
+      "flag": "🇬🇹",
+      "channels": 162,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Peru",
+      "flag": "🇵🇪",
+      "channels": 159,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pe.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Argentina",
+      "flag": "🇦🇷",
+      "channels": 158,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ar.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Romania",
+      "flag": "🇷🇴",
+      "channels": 154,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ro.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Ecuador",
+      "flag": "🇪🇨",
+      "channels": 153,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ec.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Iran",
+      "flag": "🇮🇷",
+      "channels": 152,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ir.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Indonesia",
+      "flag": "🇮🇩",
+      "channels": 151,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/id.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Chile",
+      "flag": "🇨🇱",
+      "channels": 150,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Hungary",
+      "flag": "🇭🇺",
+      "channels": 147,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/hu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Costa Rica",
+      "flag": "🇨🇷",
+      "channels": 139,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Colombia",
+      "flag": "🇨🇴",
+      "channels": 135,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/co.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Venezuela",
+      "flag": "🇻🇪",
+      "channels": 129,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ve.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Iraq",
+      "flag": "🇮🇶",
+      "channels": 123,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/iq.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Egypt",
+      "flag": "🇪🇬",
+      "channels": 117,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/eg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "El Salvador",
+      "flag": "🇸🇻",
+      "channels": 114,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sv.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Puerto Rico",
+      "flag": "🇵🇷",
+      "channels": 112,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Poland",
+      "flag": "🇵🇱",
+      "channels": 109,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bolivia",
+      "flag": "🇧🇴",
+      "channels": 106,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bo.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Slovakia",
+      "flag": "🇸🇰",
+      "channels": 103,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Ukraine",
+      "flag": "🇺🇦",
+      "channels": 103,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ua.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saudi Arabia",
+      "flag": "🇸🇦",
+      "channels": 101,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sa.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Panama",
+      "flag": "🇵🇦",
+      "channels": 99,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pa.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Austria",
+      "flag": "🇦🇹",
+      "channels": 97,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/at.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "South Korea",
+      "flag": "🇰🇷",
+      "channels": 96,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Nicaragua",
+      "flag": "🇳🇮",
+      "channels": 96,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ni.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Morocco",
+      "flag": "🇲🇦",
+      "channels": 93,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ma.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Portugal",
+      "flag": "🇵🇹",
+      "channels": 92,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Paraguay",
+      "flag": "🇵🇾",
+      "channels": 91,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/py.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Nigeria",
+      "flag": "🇳🇬",
+      "channels": 91,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ng.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Thailand",
+      "flag": "🇹🇭",
+      "channels": 91,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/th.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "United Arab Emirates",
+      "flag": "🇦🇪",
+      "channels": 89,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ae.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Algeria",
+      "flag": "🇩🇿",
+      "channels": 86,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/dz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Switzerland",
+      "flag": "🇨🇭",
+      "channels": 86,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ch.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Lebanon",
+      "flag": "🇱🇧",
+      "channels": 85,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lb.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Tunisia",
+      "flag": "🇹🇳",
+      "channels": 85,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Somalia",
+      "flag": "🇸🇴",
+      "channels": 84,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/so.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Belgium",
+      "flag": "🇧🇪",
+      "channels": 83,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/be.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Czech Republic",
+      "flag": "🇨🇿",
+      "channels": 83,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Serbia",
+      "flag": "🇷🇸",
+      "channels": 83,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/rs.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Sudan",
+      "flag": "🇸🇩",
+      "channels": 81,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sd.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cuba",
+      "flag": "🇨🇺",
+      "channels": 80,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Vietnam",
+      "flag": "🇻🇳",
+      "channels": 79,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/vn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Djibouti",
+      "flag": "🇩🇯",
+      "channels": 79,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/dj.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Jordan",
+      "flag": "🇯🇴",
+      "channels": 78,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/jo.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mauritania",
+      "flag": "🇲🇷",
+      "channels": 78,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Uruguay",
+      "flag": "🇺🇾",
+      "channels": 77,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/uy.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Croatia",
+      "flag": "🇭🇷",
+      "channels": 77,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/hr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cyprus",
+      "flag": "🇨🇾",
+      "channels": 77,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cy.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Kazakhstan",
+      "flag": "🇰🇿",
+      "channels": 77,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Comoros",
+      "flag": "🇰🇲",
+      "channels": 75,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/km.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Palestine",
+      "flag": "🇵🇸",
+      "channels": 75,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ps.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Estonia",
+      "flag": "🇪🇪",
+      "channels": 74,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ee.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Moldova",
+      "flag": "🇲🇩",
+      "channels": 74,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/md.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "North Macedonia",
+      "flag": "🇲🇰",
+      "channels": 73,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bulgaria",
+      "flag": "🇧🇬",
+      "channels": 70,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Ghana",
+      "flag": "🇬🇭",
+      "channels": 69,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gh.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "South Africa",
+      "flag": "🇿🇦",
+      "channels": 69,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/za.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Kenya",
+      "flag": "🇰🇪",
+      "channels": 68,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ke.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Armenia",
+      "flag": "🇦🇲",
+      "channels": 68,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/am.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Finland",
+      "flag": "🇫🇮",
+      "channels": 68,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/fi.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Australia",
+      "flag": "🇦🇺",
+      "channels": 66,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/au.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Kuwait",
+      "flag": "🇰🇼",
+      "channels": 66,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Slovenia",
+      "flag": "🇸🇮",
+      "channels": 66,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/si.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Sweden",
+      "flag": "🇸🇪",
+      "channels": 66,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/se.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Luxembourg",
+      "flag": "🇱🇺",
+      "channels": 65,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Qatar",
+      "flag": "🇶🇦",
+      "channels": 65,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/qa.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Ireland",
+      "flag": "🇮🇪",
+      "channels": 62,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ie.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Latvia",
+      "flag": "🇱🇻",
+      "channels": 62,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lv.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Senegal",
+      "flag": "🇸🇳",
+      "channels": 61,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Albania",
+      "flag": "🇦🇱",
+      "channels": 59,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/al.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Azerbaijan",
+      "flag": "🇦🇿",
+      "channels": 59,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/az.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Denmark",
+      "flag": "🇩🇰",
+      "channels": 59,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/dk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Georgia",
+      "flag": "🇬🇪",
+      "channels": 59,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ge.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Belarus",
+      "flag": "🇧🇾",
+      "channels": 58,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/by.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Oman",
+      "flag": "🇴🇲",
+      "channels": 58,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/om.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "flag": "🇧🇦",
+      "channels": 57,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ba.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bahrain",
+      "flag": "🇧🇭",
+      "channels": 57,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bh.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Lithuania",
+      "flag": "🇱🇹",
+      "channels": 57,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Syria",
+      "flag": "🇸🇾",
+      "channels": 57,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sy.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Uganda",
+      "flag": "🇺🇬",
+      "channels": 57,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ug.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Yemen",
+      "flag": "🇾🇪",
+      "channels": 57,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ye.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Malta",
+      "flag": "🇲🇹",
+      "channels": 53,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Ivory Coast",
+      "flag": "🇨🇮",
+      "channels": 52,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ci.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Haiti",
+      "flag": "🇭🇹",
+      "channels": 49,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ht.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Democratic Republic of the Congo",
+      "flag": "🇨🇩",
+      "channels": 49,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cd.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Pakistan",
+      "flag": "🇵🇰",
+      "channels": 47,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Afghanistan",
+      "flag": "🇦🇫",
+      "channels": 47,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/af.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Norway",
+      "flag": "🇳🇴",
+      "channels": 47,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/no.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Montenegro",
+      "flag": "🇲🇪",
+      "channels": 44,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/me.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cambodia",
+      "flag": "🇰🇭",
+      "channels": 42,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kh.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Andorra",
+      "flag": "🇦🇩",
+      "channels": 42,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ad.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Malaysia",
+      "flag": "🇲🇾",
+      "channels": 41,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/my.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Iceland",
+      "flag": "🇮🇸",
+      "channels": 41,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/is.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Uzbekistan",
+      "flag": "🇺🇿",
+      "channels": 41,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/uz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cameroon",
+      "flag": "🇨🇲",
+      "channels": 40,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Monaco",
+      "flag": "🇲🇨",
+      "channels": 40,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mc.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Togo",
+      "flag": "🇹🇬",
+      "channels": 40,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Rwanda",
+      "flag": "🇷🇼",
+      "channels": 38,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/rw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "San Marino",
+      "flag": "🇸🇲",
+      "channels": 38,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Benin",
+      "flag": "🇧🇯",
+      "channels": 37,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bj.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Liechtenstein",
+      "flag": "🇱🇮",
+      "channels": 37,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/li.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Vatican City",
+      "flag": "🇻🇦",
+      "channels": 37,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/va.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mali",
+      "flag": "🇲🇱",
+      "channels": 36,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ml.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Niger",
+      "flag": "🇳🇪",
+      "channels": 34,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ne.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "New Zealand",
+      "flag": "🇳🇿",
+      "channels": 34,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/nz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mauritius",
+      "flag": "🇲🇺",
+      "channels": 34,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Western Sahara",
+      "flag": "🇪🇭",
+      "channels": 34,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/eh.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Angola",
+      "flag": "🇦🇴",
+      "channels": 33,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ao.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Ethiopia",
+      "flag": "🇪🇹",
+      "channels": 33,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/et.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guinea",
+      "flag": "🇬🇳",
+      "channels": 33,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Republic of the Congo",
+      "flag": "🇨🇬",
+      "channels": 33,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Tanzania",
+      "flag": "🇹🇿",
+      "channels": 33,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Taiwan",
+      "flag": "🇹🇼",
+      "channels": 32,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cape Verde",
+      "flag": "🇨🇻",
+      "channels": 32,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cv.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mozambique",
+      "flag": "🇲🇿",
+      "channels": 32,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Tajikistan",
+      "flag": "🇹🇯",
+      "channels": 31,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tj.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Equatorial Guinea",
+      "flag": "🇬🇶",
+      "channels": 31,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gq.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Burkina Faso",
+      "flag": "🇧🇫",
+      "channels": 30,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Gambia",
+      "flag": "🇬🇲",
+      "channels": 30,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Laos",
+      "flag": "🇱🇦",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/la.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Chad",
+      "flag": "🇹🇩",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/td.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Gabon",
+      "flag": "🇬🇦",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ga.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Namibia",
+      "flag": "🇳🇦",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/na.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Zimbabwe",
+      "flag": "🇿🇼",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/zw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Swaziland",
+      "flag": "🇸🇿",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Eritrea",
+      "flag": "🇪🇷",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/er.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Liberia",
+      "flag": "🇱🇷",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Reunion",
+      "flag": "🇷🇪",
+      "channels": 29,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/re.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Kosovo",
+      "flag": "🇽🇰",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/xk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Myanmar",
+      "flag": "🇲🇲",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Botswana",
+      "flag": "🇧🇼",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Burundi",
+      "flag": "🇧🇮",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bi.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Central African Republic",
+      "flag": "🇨🇫",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "French Southern Territories",
+      "flag": "🇹🇫",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guinea-Bissau",
+      "flag": "🇬🇼",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Lesotho",
+      "flag": "🇱🇸",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ls.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Madagascar",
+      "flag": "🇲🇬",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Malawi",
+      "flag": "🇲🇼",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mayotte",
+      "flag": "🇾🇹",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/yt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Helena",
+      "flag": "🇸🇭",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sh.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Sao Tome and Principe",
+      "flag": "🇸🇹",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/st.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Seychelles",
+      "flag": "🇸🇨",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sc.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Sierra Leone",
+      "flag": "🇸🇱",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "South Sudan",
+      "flag": "🇸🇸",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ss.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Zambia",
+      "flag": "🇿🇲",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/zm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guadeloupe",
+      "flag": "🇬🇵",
+      "channels": 28,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gp.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Martinique",
+      "flag": "🇲🇶",
+      "channels": 26,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mq.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Mongolia",
+      "flag": "🇲🇳",
+      "channels": 26,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Singapore",
+      "flag": "🇸🇬",
+      "channels": 26,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bangladesh",
+      "flag": "🇧🇩",
+      "channels": 25,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bd.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Philippines",
+      "flag": "🇵🇭",
+      "channels": 25,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ph.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Kyrgyzstan",
+      "flag": "🇰🇬",
+      "channels": 24,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Aruba",
+      "flag": "🇦🇼",
+      "channels": 23,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/aw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Brunei",
+      "flag": "🇧🇳",
+      "channels": 22,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Israel",
+      "flag": "🇮🇱",
+      "channels": 22,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/il.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Barthélemy",
+      "flag": "🇧🇱",
+      "channels": 22,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Martin",
+      "flag": "🇲🇫",
+      "channels": 22,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Sint Maarten",
+      "flag": "🇸🇽",
+      "channels": 22,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sx.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Jamaica",
+      "flag": "🇯🇲",
+      "channels": 21,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/jm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Maldives",
+      "flag": "🇲🇻",
+      "channels": 20,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mv.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Curacao",
+      "flag": "🇨🇼",
+      "channels": 19,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/cw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Swahili",
+      "flag": "🇹🇿",
+      "channels": 19,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bahamas",
+      "flag": "🇧🇸",
+      "channels": 18,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bs.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Auto",
+      "flag": "🚗",
+      "channels": 18,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/auto.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Nepal",
+      "flag": "🇳🇵",
+      "channels": 17,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/np.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Sri Lanka",
+      "flag": "🇱🇰",
+      "channels": 17,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "French Guiana",
+      "flag": "🇬🇫",
+      "channels": 17,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Trinidad and Tobago",
+      "flag": "🇹🇹",
+      "channels": 17,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Japan",
+      "flag": "🇯🇵",
+      "channels": 16,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/jp.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "British Virgin Islands",
+      "flag": "🇻🇬",
+      "channels": 16,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/vg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guyana",
+      "flag": "🇬🇾",
+      "channels": 16,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gy.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Turkmenistan",
+      "flag": "🇹🇲",
+      "channels": 16,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Barbados",
+      "flag": "🇧🇧",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bb.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Dominica",
+      "flag": "🇩🇲",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/dm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Anguilla",
+      "flag": "🇦🇮",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ai.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Antigua and Barbuda",
+      "flag": "🇦🇬",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ag.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cayman Islands",
+      "flag": "🇰🇾",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ky.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Grenada",
+      "flag": "🇬🇩",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gd.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Montserrat",
+      "flag": "🇲🇸",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ms.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Kitts and Nevis",
+      "flag": "🇰🇳",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Lucia",
+      "flag": "🇱🇨",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/lc.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Vincent and the Grenadines",
+      "flag": "🇻🇨",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/vc.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Turks and Caicos Islands",
+      "flag": "🇹🇨",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tc.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "U.S. Virgin Islands",
+      "flag": "🇻🇮",
+      "channels": 14,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/vi.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "East Timor",
+      "flag": "🇹🇱",
+      "channels": 15,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Hong Kong",
+      "flag": "🇭🇰",
+      "channels": 12,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/hk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bermuda",
+      "flag": "🇧🇲",
+      "channels": 10,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Belize",
+      "flag": "🇧🇿",
+      "channels": 10,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bz.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bhutan",
+      "flag": "🇧🇹",
+      "channels": 10,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bt.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Greenland",
+      "flag": "🇬🇱",
+      "channels": 9,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gl.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Saint Pierre and Miquelon",
+      "flag": "🇵🇲",
+      "channels": 9,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guam",
+      "flag": "🇬🇺",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "North Korea",
+      "flag": "🇰🇵",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/kp.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Samoa",
+      "flag": "🇼🇸",
+      "channels": 8,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ws.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "French Polynesia",
+      "flag": "🇵🇫",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Papua New Guinea",
+      "flag": "🇵🇬",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Suriname",
+      "flag": "🇸🇷",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Macao",
+      "flag": "🇲🇴",
+      "channels": 7,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mo.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "American Samoa",
+      "flag": "🇦🇸",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/as.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Cook Islands",
+      "flag": "🇨🇰",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ck.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Fiji",
+      "flag": "🇫🇯",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/fj.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Kiribati",
+      "flag": "🇰🇮",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/ki.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Marshall Islands",
+      "flag": "🇲🇭",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mh.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Micronesia",
+      "flag": "🇫🇲",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/fm.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Nauru",
+      "flag": "🇳🇷",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/nr.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "New Caledonia",
+      "flag": "🇳🇨",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/nc.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Niue",
+      "flag": "🇳🇺",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/nu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Norfolk Island",
+      "flag": "🇳🇫",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/nf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Northern Mariana Islands",
+      "flag": "🇲🇵",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/mp.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Palau",
+      "flag": "🇵🇼",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pw.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Pitcairn Islands",
+      "flag": "🇵🇳",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/pn.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Solomon Islands",
+      "flag": "🇸🇧",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/sb.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Tokelau",
+      "flag": "🇹🇰",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Tonga",
+      "flag": "🇹🇴",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/to.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Tuvalu",
+      "flag": "🇹🇻",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/tv.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Vanuatu",
+      "flag": "🇻🇺",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/vu.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Wallis and Futuna",
+      "flag": "🇼🇫",
+      "channels": 6,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/wf.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bonaire",
+      "flag": "🇧🇶",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bq.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Bouvet Island",
+      "flag": "🇧🇻",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/bv.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Falkland Islands",
+      "flag": "🇫🇰",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/fk.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "South Georgia and the South Sandwich Islands",
+      "flag": "🇬🇸",
+      "channels": 5,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gs.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Faroe Islands",
+      "flag": "🇫🇴",
+      "channels": 3,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/fo.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Guernsey",
+      "flag": "🇬🇬",
+      "channels": 1,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/gg.m3u",
+      "subdivisions": []
+    },
+    {
+      "name": "Undefined",
+      "flag": null,
+      "channels": 2256,
+      "playlist_url": "https://iptv-org.github.io/iptv/countries/undefined.m3u",
+      "subdivisions": []
+    }
+  ]
