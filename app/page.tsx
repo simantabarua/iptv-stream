@@ -40,7 +40,7 @@ import CategoryBrowser from "./components/category-browser";
 import LanguageBrowser from "./components/language-browser";
 import CountryBrowser from "./components/country-browser";
 import RegionBrowser from "./components/region-browser";
-import { fetchPlaylist } from "./utils/m3u-parser";
+import { fetchPlaylist, getProxiedStreamUrl } from "./utils/m3u-parser";
 import categoriesData from "../data/categories.json";
 import languagesData from "../data/language.json";
 import countriesData from "../data/countries.json";
@@ -596,21 +596,37 @@ export default function IPTVStreaming() {
 
   const handleCategorySelect = useCallback((category: Category) => {
     setSelectedCategory(category);
+    setSelectedLanguage(null);
+    setSelectedCountry(null);
+    setSelectedRegion(null);
+    setSelectedPlaylist("categories");
     setShowCategoryBrowser(false);
   }, []);
 
   const handleLanguageSelect = useCallback((language: Language) => {
     setSelectedLanguage(language);
+    setSelectedCategory(null);
+    setSelectedCountry(null);
+    setSelectedRegion(null);
+    setSelectedPlaylist("languages");
     setShowLanguageBrowser(false);
   }, []);
 
   const handleCountrySelect = useCallback((country: Country) => {
     setSelectedCountry(country);
+    setSelectedCategory(null);
+    setSelectedLanguage(null);
+    setSelectedRegion(null);
+    setSelectedPlaylist("countries");
     setShowCountryBrowser(false);
   }, []);
 
   const handleRegionSelect = useCallback((region: Region) => {
     setSelectedRegion(region);
+    setSelectedCategory(null);
+    setSelectedLanguage(null);
+    setSelectedCountry(null);
+    setSelectedPlaylist("regions");
     setShowRegionBrowser(false);
   }, []);
 
@@ -1051,7 +1067,7 @@ export default function IPTVStreaming() {
           <div className="flex-1 bg-black relative">
             {currentChannel && (
               <VideoPlayer
-                src={currentChannel.url}
+                src={getProxiedStreamUrl(currentChannel.url)}
                 title={currentChannel.name}
                 poster={currentChannel.logo}
               />
