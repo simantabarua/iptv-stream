@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
+} from "@/components/ui/sheet";
 import {
   Tv,
   Search,
@@ -32,58 +32,66 @@ import {
   MapPin,
   Menu,
   Database,
-} from "lucide-react"
-import VideoPlayer from "./components/video-player"
-import ChannelGrid from "./components/channel-grid"
-import ChannelList from "./components/channel-list"
-import CategoryBrowser from "./components/category-browser"
-import LanguageBrowser from "./components/language-browser"
-import CountryBrowser from "./components/country-browser"
-import RegionBrowser from "./components/region-browser"
-import { fetchPlaylist } from "./utils/m3u-parser"
-import categoriesData from "../data/categories.json"
-import languagesData from "../data/language.json"
-import countriesData from "../data/countries.json"
-import regionsData from "../data/region.json"
+} from "lucide-react";
+import VideoPlayer from "./components/video-player";
+import ChannelGrid from "./components/channel-grid";
+import ChannelList from "./components/channel-list";
+import CategoryBrowser from "./components/category-browser";
+import LanguageBrowser from "./components/language-browser";
+import CountryBrowser from "./components/country-browser";
+import RegionBrowser from "./components/region-browser";
+import { fetchPlaylist } from "./utils/m3u-parser";
+import categoriesData from "../data/categories.json";
+import languagesData from "../data/language.json";
+import countriesData from "../data/countries.json";
+import regionsData from "../data/region.json";
 
 interface Channel {
-  id: string
-  name: string
-  url: string
-  logo?: string
-  category?: string
-  country?: string
-  language?: string
-  region?: string
-  source?: string
+  id: string;
+  name: string;
+  url: string;
+  logo?: string;
+  category?: string;
+  country?: string;
+  language?: string;
+  region?: string;
+  source?: string;
 }
 
 interface Category {
-  category: string
-  channels: number
-  playlist: string
+  category: string;
+  channels: number;
+  playlist: string;
 }
 
 interface Language {
-  language_name: string
-  channels: number
-  playlist_url: string
+  language_name: string;
+  channels: number;
+  playlist_url: string;
 }
 
 interface Country {
-  name: string
-  flag: string | null
-  channels: number
-  playlist_url: string
-  subdivisions: any[]
+  name: string;
+  flag: string | null;
+  channels: number;
+  playlist_url: string;
+  subdivisions: any[];
 }
 
 interface Region {
-  region_name?: string
-  name?: string
-  channels: number
-  playlist_url: string
+  region_name?: string;
+  name?: string;
+  channels: number;
+  playlist_url: string;
 }
+
+type PlaylistType =
+  | "main"
+  | "categories"
+  | "languages"
+  | "countries"
+  | "regions"
+  | "sources";
 
 const PLAYLIST_URLS = {
   main: "https://iptv-org.github.io/iptv/index.m3u",
@@ -91,294 +99,361 @@ const PLAYLIST_URLS = {
   languages: "https://iptv-org.github.io/iptv/languages/",
   countries: "https://iptv-org.github.io/iptv/countries/",
   regions: "https://iptv-org.github.io/iptv/regions/",
-  sources: "https://iptv-org.github.io/iptv/sources/", // TODO: Replace with valid source URL or implement SourceBrowser
-}
+  sources: "https://iptv-org.github.io/iptv/sources/",
+};
 
-const CHANNELS_PER_PAGE = 50
-const INITIAL_LOAD_LIMIT = 100
+const CHANNELS_PER_PAGE = 50;
+const INITIAL_LOAD_LIMIT = 50;
+
+const useDebounce = <T,>(value: T, delay: number): T => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+  return debouncedValue;
+};
 
 export default function IPTVStreaming() {
-  const [allChannels, setAllChannels] = useState<Channel[]>([])
-  const [displayedChannels, setDisplayedChannels] = useState<Channel[]>([])
-  const [currentChannel, setCurrentChannel] = useState<Channel | null>(null)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("")
-  const [selectedPlaylist, setSelectedPlaylist] = useState("main")
-  const [selectedFilter, setSelectedFilter] = useState("all")
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null)
-  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(null)
-  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
-  const [selectedRegion, setSelectedRegion] = useState<Region | null>(null)
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid")
-  const [loading, setLoading] = useState(true)
-  const [totalChannels, setTotalChannels] = useState(0)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [showSearch, setShowSearch] = useState(false)
-  const [showCategoryBrowser, setShowCategoryBrowser] = useState(false)
-  const [showLanguageBrowser, setShowLanguageBrowser] = useState(false)
-  const [showCountryBrowser, setShowCountryBrowser] = useState(false)
-  const [showRegionBrowser, setShowRegionBrowser] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [loadingMore, setLoadingMore] = useState(false)
+  const [allChannels, setAllChannels] = useState<Channel[]>([]);
+  const [displayedChannels, setDisplayedChannels] = useState<Channel[]>([]);
+  const [currentChannel, setCurrentChannel] = useState<Channel | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  const [selectedPlaylist, setSelectedPlaylist] =
+    useState<PlaylistType>("main");
+  const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(
+    null
+  );
+  const [selectedLanguage, setSelectedLanguage] = useState<Language | null>(
+    null
+  );
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
+  const [selectedRegion, setSelectedRegion] = useState<Region | null>(null);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [loading, setLoading] = useState(true);
+  const [totalChannels, setTotalChannels] = useState(0);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [showCategoryBrowser, setShowCategoryBrowser] = useState(false);
+  const [showLanguageBrowser, setShowLanguageBrowser] = useState(false);
+  const [showCountryBrowser, setShowCountryBrowser] = useState(false);
+  const [showRegionBrowser, setShowRegionBrowser] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
 
-  const [categories] = useState<Category[]>(categoriesData)
-  const [languages] = useState<Language[]>(languagesData)
-  const [countries] = useState<Country[]>(countriesData)
-  const [regions] = useState<Region[]>(regionsData)
-  const [availableFilters, setAvailableFilters] = useState<string[]>(["all"])
+  const [categories] = useState<Category[]>(categoriesData);
+  const [languages] = useState<Language[]>(languagesData);
+  const [countries] = useState<Country[]>(countriesData);
+  const [regions] = useState<Region[]>(regionsData);
+  const [availableFilters, setAvailableFilters] = useState<string[]>(["all"]);
 
-  const playlistOptions = [
-    { value: "main", label: "All Channels", icon: <Database className="w-4 h-4" /> },
-    { value: "categories", label: "By Category", icon: <Folder className="w-4 h-4" /> },
-    { value: "languages", label: "By Language", icon: <Languages className="w-4 h-4" /> },
-    { value: "countries", label: "By Country", icon: <Globe className="w-4 h-4" /> },
-    { value: "regions", label: "By Region", icon: <MapPin className="w-4 h-4" /> },
-    { value: "sources", label: "By Source", icon: <Radio className="w-4 h-4" /> },
-  ]
+  const playlistOptions = useMemo(
+    () => [
+      {
+        value: "main",
+        label: "All Channels",
+        icon: <Database className="w-4 h-4" />,
+      },
+      {
+        value: "categories",
+        label: "By Category",
+        icon: <Folder className="w-4 h-4" />,
+      },
+      {
+        value: "languages",
+        label: "By Language",
+        icon: <Languages className="w-4 h-4" />,
+      },
+      {
+        value: "countries",
+        label: "By Country",
+        icon: <Globe className="w-4 h-4" />,
+      },
+      {
+        value: "regions",
+        label: "By Region",
+        icon: <MapPin className="w-4 h-4" />,
+      },
+      {
+        value: "sources",
+        label: "By Source",
+        icon: <Radio className="w-4 h-4" />,
+      },
+    ],
+    []
+  );
 
-  // Debounced search
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearchTerm(searchTerm), 300)
-    return () => clearTimeout(timer)
-  }, [searchTerm])
-
-  // Load playlist based on selection
-  useEffect(() => {
-    if (selectedCategory) {
-      loadCategoryPlaylist(selectedCategory)
-    } else if (selectedLanguage) {
-      loadLanguagePlaylist(selectedLanguage)
-    } else if (selectedCountry) {
-      loadCountryPlaylist(selectedCountry)
-    } else if (selectedRegion) {
-      loadRegionPlaylist(selectedRegion)
-    } else {
-      loadPlaylist(selectedPlaylist)
-    }
-  }, [selectedPlaylist, selectedCategory, selectedLanguage, selectedCountry, selectedRegion])
-
-  // Filter and paginate channels
   const filteredChannels = useMemo(() => {
-    let filtered = allChannels
+    let filtered = allChannels;
     if (debouncedSearchTerm) {
       filtered = filtered.filter((channel) =>
         channel.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
-      )
+      );
     }
     if (selectedFilter !== "all") {
       filtered = filtered.filter((channel) => {
         switch (selectedPlaylist) {
           case "categories":
-            return channel.category === selectedFilter
+            return channel.category === selectedFilter;
           case "languages":
-            return channel.language === selectedFilter
+            return channel.language === selectedFilter;
           case "countries":
-            return channel.country === selectedFilter
+            return channel.country === selectedFilter;
           case "regions":
-            return channel.region === selectedFilter
+            return channel.region === selectedFilter;
           case "sources":
-            return channel.source === selectedFilter
+            return channel.source === selectedFilter;
           default:
-            return channel.category === selectedFilter
+            return channel.category === selectedFilter;
         }
-      })
+      });
     }
-    return filtered
-  }, [allChannels, debouncedSearchTerm, selectedFilter, selectedPlaylist])
+    return filtered;
+  }, [allChannels, debouncedSearchTerm, selectedFilter, selectedPlaylist]);
 
   useEffect(() => {
-    setCurrentPage(1)
-    setDisplayedChannels(filteredChannels.slice(0, CHANNELS_PER_PAGE))
-  }, [filteredChannels])
+    setCurrentPage(1);
+    setDisplayedChannels(filteredChannels.slice(0, CHANNELS_PER_PAGE));
+  }, [filteredChannels]);
 
-  const resetState = () => {
-    setSelectedCategory(null)
-    setSelectedLanguage(null)
-    setSelectedCountry(null)
-    setSelectedRegion(null)
-    setCurrentPage(1)
-    setLoading(true)
-  }
+  const resetState = useCallback(() => {
+    setSelectedCategory(null);
+    setSelectedLanguage(null);
+    setSelectedCountry(null);
+    setSelectedRegion(null);
+    setCurrentPage(1);
+    setLoading(true);
+  }, []);
 
-  const loadPlaylist = async (playlistType: string) => {
-    resetState()
-    try {
-      switch (playlistType) {
-        case "main":
-          const channels = await fetchPlaylist(PLAYLIST_URLS.main)
-          setAllChannels(channels)
-          setDisplayedChannels(channels.slice(0, INITIAL_LOAD_LIMIT))
-          setTotalChannels(37189) // Real total from iptv-org
-          if (channels.length > 0) setCurrentChannel(channels[0])
-          updateAvailableFilters(channels, playlistType)
-          break
-        case "categories":
-          setShowCategoryBrowser(true)
-          break
-        case "languages":
-          setShowLanguageBrowser(true)
-          break
-        case "countries":
-          setShowCountryBrowser(true)
-          break
-        case "regions":
-          setShowRegionBrowser(true)
-          break
-        case "sources":
-          // TODO: Implement SourceBrowser or use valid source playlist URL
-          console.warn("Sources playlist not implemented")
-          setAllChannels([])
-          setDisplayedChannels([])
-          setTotalChannels(0)
-          break
-        default:
-          throw new Error(`Unknown playlist type: ${playlistType}`)
+  const loadPlaylist = useCallback(
+    async (playlistType: PlaylistType) => {
+      resetState();
+      try {
+        switch (playlistType) {
+          case "main":
+            const channels = await fetchPlaylist(PLAYLIST_URLS.main);
+            setAllChannels(channels);
+            setDisplayedChannels(channels.slice(0, INITIAL_LOAD_LIMIT));
+            setTotalChannels(37189);
+            if (channels.length > 0) setCurrentChannel(channels[0]);
+            updateAvailableFilters(channels, playlistType);
+            break;
+          case "categories":
+            setShowCategoryBrowser(true);
+            break;
+          case "languages":
+            setShowLanguageBrowser(true);
+            break;
+          case "countries":
+            setShowCountryBrowser(true);
+            break;
+          case "regions":
+            setShowRegionBrowser(true);
+            break;
+          case "sources":
+            console.warn("Sources playlist not implemented");
+            setAllChannels([]);
+            setDisplayedChannels([]);
+            setTotalChannels(0);
+            break;
+          default:
+            throw new Error(`Unknown playlist type: ${playlistType}`);
+        }
+      } catch (error) {
+        console.error(`Failed to load ${playlistType} playlist:`, error);
+        alert(
+          `Failed to load ${playlistType} playlist. Please try again later.`
+        );
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error(`Failed to load ${playlistType} playlist:`, error)
-      alert(`Failed to load ${playlistType} playlist. Please try again later.`)
-    } finally {
-      setLoading(false)
-    }
-  }
+    },
+    [resetState]
+  );
 
-  const loadCategoryPlaylist = async (category: Category) => {
-    resetState()
-    setSelectedCategory(category)
-    try {
-      const channels = await fetchPlaylist(category.playlist, "category", category.category)
-      setAllChannels(channels)
-      setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(category.channels)
-      if (channels.length > 0) setCurrentChannel(channels[0])
-      setAvailableFilters(["all"])
-      setSelectedFilter("all")
-    } catch (error) {
-      console.error(`Failed to load ${category.category} playlist:`, error)
-      alert(`Failed to load ${category.category} playlist. Using fallback data.`)
-      const fallback = generateFallbackChannels("category", category.category, category.channels)
-      setAllChannels(fallback)
-      setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(category.channels)
-      if (fallback.length > 0) setCurrentChannel(fallback[0])
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const loadLanguagePlaylist = async (language: Language) => {
-    resetState()
-    setSelectedLanguage(language)
-    try {
-      const channels = await fetchPlaylist(language.playlist_url, "language", language.language_name)
-      setAllChannels(channels)
-      setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(language.channels)
-      if (channels.length > 0) setCurrentChannel(channels[0])
-      setAvailableFilters(["all"])
-      setSelectedFilter("all")
-    } catch (error) {
-      console.error(`Failed to load ${language.language_name} playlist:`, error)
-      alert(`Failed to load ${language.language_name} playlist. Using fallback data.`)
-      const fallback = generateFallbackChannels("language", language.language_name, language.channels)
-      setAllChannels(fallback)
-      setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(language.channels)
-      if (fallback.length > 0) setCurrentChannel(fallback[0])
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const loadCountryPlaylist = async (country: Country) => {
-    resetState()
-    setSelectedCountry(country)
-    try {
-      const channels = await fetchPlaylist(country.playlist_url, "country", country.name)
-      setAllChannels(channels)
-      setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(country.channels)
-      if (channels.length > 0) setCurrentChannel(channels[0])
-      setAvailableFilters(["all"])
-      setSelectedFilter("all")
-    } catch (error) {
-      console.error(`Failed to load ${country.name} playlist:`, error)
-      alert(`Failed to load ${country.name} playlist. Using fallback data.`)
-      const fallback = generateFallbackChannels("country", country.name, country.channels, country.flag)
-      setAllChannels(fallback)
-      setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(country.channels)
-      if (fallback.length > 0) setCurrentChannel(fallback[0])
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const loadRegionPlaylist = async (region: Region) => {
-    resetState()
-    setSelectedRegion(region)
-    const regionName = region.region_name || region.name || "Unknown Region"
-    try {
-      const channels = await fetchPlaylist(region.playlist_url, "region", regionName)
-      setAllChannels(channels)
-      setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(region.channels)
-      if (channels.length > 0) setCurrentChannel(channels[0])
-      setAvailableFilters(["all"])
-      setSelectedFilter("all")
-    } catch (error) {
-      console.error(`Failed to load ${regionName} playlist:`, error)
-      alert(`Failed to load ${regionName} playlist. Using fallback data.`)
-      const fallback = generateFallbackChannels("region", regionName, region.channels)
-      setAllChannels(fallback)
-      setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE))
-      setTotalChannels(region.channels)
-      if (fallback.length > 0) setCurrentChannel(fallback[0])
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const generateFallbackChannels = (
-    type: "category" | "language" | "country" | "region",
-    name: string,
-    channelCount: number,
-    flag?: string | null
-  ): Channel[] => {
-    const sampleCount = Math.min(30, Math.max(5, Math.floor(channelCount / 50)))
-    const channels: Channel[] = []
-    const prefix = name.toLowerCase().replace(/\s+/g, "_")
-
-    for (let i = 1; i <= sampleCount; i++) {
-      const channel: Channel = {
-        id: `${prefix}_${i}`,
-        name: `${name} Channel ${i}`,
-        url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8", // Replace with valid .m3u8 URL
-        logo: `/placeholder.svg?height=60&width=100&text=${(flag || name.substring(0, 4)).toUpperCase()}${i}`,
+  const loadCategoryPlaylist = useCallback(
+    async (category: Category) => {
+      resetState();
+      setSelectedCategory(category);
+      try {
+        const channels = await fetchPlaylist(category.playlist);
+        setAllChannels(channels);
+        setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(category.channels);
+        if (channels.length > 0) setCurrentChannel(channels[0]);
+        setAvailableFilters(["all"]);
+        setSelectedFilter("all");
+      } catch (error) {
+        console.error(`Failed to load ${category.category} playlist:`, error);
+        alert(
+          `Failed to load ${category.category} playlist. Using fallback data.`
+        );
+        const fallback = generateFallbackChannels(
+          "category",
+          category.category,
+          category.channels
+        );
+        setAllChannels(fallback);
+        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(category.channels);
+        if (fallback.length > 0) setCurrentChannel(fallback[0]);
+      } finally {
+        setLoading(false);
       }
-      if (type === "category") channel.category = name
-      if (type === "language") {
-        channel.language = name
-        channel.country = getLanguageCountry(name)
-        channel.category = "General"
-      }
-      if (type === "country") {
-        channel.country = name
-        channel.language = getCountryLanguage(name)
-        channel.category = getCountryCategory(i)
-      }
-      if (type === "region") {
-        channel.region = name
-        channel.country = getRegionCountry(name)
-        channel.language = getRegionLanguage(name)
-        channel.category = getRegionCategory(i)
-      }
-      channels.push(channel)
-    }
-    return channels
-  }
+    },
+    [resetState]
+  );
 
-  const getLanguageCountry = (language: string): string => {
+  const loadLanguagePlaylist = useCallback(
+    async (language: Language) => {
+      resetState();
+      setSelectedLanguage(language);
+      try {
+        const channels = await fetchPlaylist(language.playlist_url);
+        setAllChannels(channels);
+        setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(language.channels);
+        if (channels.length > 0) setCurrentChannel(channels[0]);
+        setAvailableFilters(["all"]);
+        setSelectedFilter("all");
+      } catch (error) {
+        console.error(
+          `Failed to load ${language.language_name} playlist:`,
+          error
+        );
+        alert(
+          `Failed to load ${language.language_name} playlist. Using fallback data.`
+        );
+        const fallback = generateFallbackChannels(
+          "language",
+          language.language_name,
+          language.channels
+        );
+        setAllChannels(fallback);
+        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(language.channels);
+        if (fallback.length > 0) setCurrentChannel(fallback[0]);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [resetState]
+  );
+
+  const loadCountryPlaylist = useCallback(
+    async (country: Country) => {
+      resetState();
+      setSelectedCountry(country);
+      try {
+        const channels = await fetchPlaylist(country.playlist_url);
+        setAllChannels(channels);
+        setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(country.channels);
+        if (channels.length > 0) setCurrentChannel(channels[0]);
+        setAvailableFilters(["all"]);
+        setSelectedFilter("all");
+      } catch (error) {
+        console.error(`Failed to load ${country.name} playlist:`, error);
+        alert(`Failed to load ${country.name} playlist. Using fallback data.`);
+        const fallback = generateFallbackChannels(
+          "country",
+          country.name,
+          country.channels,
+          country.flag
+        );
+        setAllChannels(fallback);
+        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(country.channels);
+        if (fallback.length > 0) setCurrentChannel(fallback[0]);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [resetState]
+  );
+
+  const loadRegionPlaylist = useCallback(
+    async (region: Region) => {
+      resetState();
+      setSelectedRegion(region);
+      const regionName = region.region_name || region.name || "Unknown Region";
+      try {
+        const channels = await fetchPlaylist(region.playlist_url);
+        setAllChannels(channels);
+        setDisplayedChannels(channels.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(region.channels);
+        if (channels.length > 0) setCurrentChannel(channels[0]);
+        setAvailableFilters(["all"]);
+        setSelectedFilter("all");
+      } catch (error) {
+        console.error(`Failed to load ${regionName} playlist:`, error);
+        alert(`Failed to load ${regionName} playlist. Using fallback data.`);
+        const fallback = generateFallbackChannels(
+          "region",
+          regionName,
+          region.channels
+        );
+        setAllChannels(fallback);
+        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
+        setTotalChannels(region.channels);
+        if (fallback.length > 0) setCurrentChannel(fallback[0]);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [resetState]
+  );
+
+  const generateFallbackChannels = useCallback(
+    (
+      type: "category" | "language" | "country" | "region",
+      name: string,
+      channelCount: number,
+      flag?: string | null
+    ): Channel[] => {
+      const sampleCount = Math.min(
+        30,
+        Math.max(5, Math.floor(channelCount / 50))
+      );
+      const channels: Channel[] = [];
+      const prefix = name.toLowerCase().replace(/\s+/g, "_");
+
+      for (let i = 1; i <= sampleCount; i++) {
+        const channel: Channel = {
+          id: `${prefix}_${i}`,
+          name: `${name} Channel ${i}`,
+          url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
+          logo: `/placeholder.svg?height=60&width=100&text=${(
+            flag || name.substring(0, 4)
+          ).toUpperCase()}${i}`,
+        };
+        if (type === "category") channel.category = name;
+        if (type === "language") {
+          channel.language = name;
+          channel.country = getLanguageCountry(name);
+          channel.category = "General";
+        }
+        if (type === "country") {
+          channel.country = name;
+          channel.language = getCountryLanguage(name);
+          channel.category = getCountryCategory(i);
+        }
+        if (type === "region") {
+          channel.region = name;
+          channel.country = getRegionCountry(name);
+          channel.language = getRegionLanguage(name);
+          channel.category = getRegionCategory(i);
+        }
+        channels.push(channel);
+      }
+      return channels;
+    },
+    []
+  );
+
+  const getLanguageCountry = useCallback((language: string): string => {
     const map: { [key: string]: string } = {
       English: "United States",
       Spanish: "Spain",
@@ -400,11 +475,11 @@ export default function IPTVStreaming() {
       Bengali: "Bangladesh",
       Vietnamese: "Vietnam",
       Thai: "Thailand",
-    }
-    return map[language] || "Various"
-  }
+    };
+    return map[language] || "Various";
+  }, []);
 
-  const getCountryLanguage = (country: string): string => {
+  const getCountryLanguage = useCallback((country: string): string => {
     const map: { [key: string]: string } = {
       "United States": "English",
       Spain: "Spanish",
@@ -426,81 +501,143 @@ export default function IPTVStreaming() {
       Bangladesh: "Bengali",
       Vietnam: "Vietnamese",
       Thailand: "Thai",
-    }
-    return map[country] || "Local"
-  }
+    };
+    return map[country] || "Local";
+  }, []);
 
-  const getCountryCategory = (index: number): string => {
-    const categories = ["News", "Entertainment", "Sports", "Music", "Movies", "Education", "Kids", "Documentary"]
-    return categories[index % categories.length]
-  }
+  const getCountryCategory = useCallback((index: number): string => {
+    const categories = [
+      "News",
+      "Entertainment",
+      "Sports",
+      "Music",
+      "Movies",
+      "Education",
+      "Kids",
+      "Documentary",
+    ];
+    return categories[index % categories.length];
+  }, []);
 
-  const getRegionLanguage = (region: string): string => {
-    if (region.includes("Europe")) return "Various European"
-    if (region.includes("America")) return "English/Spanish"
-    if (region.includes("Asia")) return "Various Asian"
-    if (region.includes("Africa")) return "Various African"
-    if (region.includes("Middle East") || region.includes("Arab")) return "Arabic"
-    return "Various"
-  }
+  const getRegionLanguage = useCallback((region: string): string => {
+    if (region.includes("Europe")) return "Various European";
+    if (region.includes("America")) return "English/Spanish";
+    if (region.includes("Asia")) return "Various Asian";
+    if (region.includes("Africa")) return "Various African";
+    if (region.includes("Middle East") || region.includes("Arab"))
+      return "Arabic";
+    return "Various";
+  }, []);
 
-  const getRegionCountry = (region: string): string => {
-    if (region.includes("North America")) return "United States"
-    if (region.includes("Europe")) return "Germany"
-    if (region.includes("Asia")) return "China"
-    if (region.includes("Africa")) return "South Africa"
-    if (region.includes("Middle East")) return "Saudi Arabia"
-    return "Various"
-  }
+  const getRegionCountry = useCallback((region: string): string => {
+    if (region.includes("North America")) return "United States";
+    if (region.includes("Europe")) return "Germany";
+    if (region.includes("Asia")) return "China";
+    if (region.includes("Africa")) return "South Africa";
+    if (region.includes("Middle East")) return "Saudi Arabia";
+    return "Various";
+  }, []);
 
-  const getRegionCategory = (index: number): string => {
-    const categories = ["General", "News", "Entertainment", "Sports", "Culture", "Education", "Music", "Movies"]
-    return categories[index % categories.length]
-  }
+  const getRegionCategory = useCallback((index: number): string => {
+    const categories = [
+      "General",
+      "News",
+      "Entertainment",
+      "Sports",
+      "Culture",
+      "Education",
+      "Music",
+      "Movies",
+    ];
+    return categories[index % categories.length];
+  }, []);
 
-  const updateAvailableFilters = (channels: Channel[], playlistType: string) => {
-    const filters = new Set<string>(["all"])
-    channels.forEach((channel) => {
-      const key = playlistType === "languages" ? channel.language :
-                  playlistType === "countries" ? channel.country :
-                  playlistType === "regions" ? channel.region :
-                  playlistType === "sources" ? channel.source :
-                  channel.category
-      if (key) filters.add(key)
-    })
-    setAvailableFilters(Array.from(filters))
-  }
+  const updateAvailableFilters = useCallback(
+    (channels: Channel[], playlistType: PlaylistType) => {
+      const filters = new Set<string>(["all"]);
+      channels.forEach((channel) => {
+        const key =
+          playlistType === "languages"
+            ? channel.language
+            : playlistType === "countries"
+            ? channel.country
+            : playlistType === "regions"
+            ? channel.region
+            : playlistType === "sources"
+            ? channel.source
+            : channel.category;
+        if (key) filters.add(key);
+      });
+      setAvailableFilters(Array.from(filters));
+    },
+    []
+  );
 
   const loadMoreChannels = useCallback(() => {
-    if (loadingMore) return
-    setLoadingMore(true)
-    const nextPage = currentPage + 1
-    const startIndex = (nextPage - 1) * CHANNELS_PER_PAGE
-    const newChannels = filteredChannels.slice(startIndex, startIndex + CHANNELS_PER_PAGE)
+    if (loadingMore) return;
+    setLoadingMore(true);
+    const nextPage = currentPage + 1;
+    const startIndex = (nextPage - 1) * CHANNELS_PER_PAGE;
+    const newChannels = filteredChannels.slice(
+      startIndex,
+      startIndex + CHANNELS_PER_PAGE
+    );
     if (newChannels.length > 0) {
-      setDisplayedChannels((prev) => [...prev, ...newChannels])
-      setCurrentPage(nextPage)
+      setDisplayedChannels((prev) => [...prev, ...newChannels]);
+      setCurrentPage(nextPage);
     }
-    setLoadingMore(false)
-  }, [currentPage, filteredChannels, loadingMore])
+    setLoadingMore(false);
+  }, [currentPage, filteredChannels, loadingMore]);
 
-  const handleChannelSelect = (channel: Channel) => setCurrentChannel(channel)
-  const handleCategorySelect = (category: Category) => {
-    setSelectedCategory(category)
-    setShowCategoryBrowser(false)
-  }
-  const handleLanguageSelect = (language: Language) => {
-    setSelectedLanguage(language)
-    setShowLanguageBrowser(false)
-  }
-  const handleCountrySelect = (country: Country) => {
-    setSelectedCountry(country)
-    setShowCountryBrowser(false)
-  }
-  const handleRegionSelect = (region: Region) => {
-    setSelectedRegion(region)
-    setShowRegionBrowser(false)
-  }
+  const handleChannelSelect = useCallback(
+    (channel: Channel) => setCurrentChannel(channel),
+    []
+  );
+
+  const handleCategorySelect = useCallback((category: Category) => {
+    setSelectedCategory(category);
+    setShowCategoryBrowser(false);
+  }, []);
+
+  const handleLanguageSelect = useCallback((language: Language) => {
+    setSelectedLanguage(language);
+    setShowLanguageBrowser(false);
+  }, []);
+
+  const handleCountrySelect = useCallback((country: Country) => {
+    setSelectedCountry(country);
+    setShowCountryBrowser(false);
+  }, []);
+
+  const handleRegionSelect = useCallback((region: Region) => {
+    setSelectedRegion(region);
+    setShowRegionBrowser(false);
+  }, []);
+
+  useEffect(() => {
+    if (selectedCategory) {
+      loadCategoryPlaylist(selectedCategory);
+    } else if (selectedLanguage) {
+      loadLanguagePlaylist(selectedLanguage);
+    } else if (selectedCountry) {
+      loadCountryPlaylist(selectedCountry);
+    } else if (selectedRegion) {
+      loadRegionPlaylist(selectedRegion);
+    } else {
+      loadPlaylist(selectedPlaylist);
+    }
+  }, [
+    selectedPlaylist,
+    selectedCategory,
+    selectedLanguage,
+    selectedCountry,
+    selectedRegion,
+    loadPlaylist,
+    loadCategoryPlaylist,
+    loadLanguagePlaylist,
+    loadCountryPlaylist,
+    loadRegionPlaylist,
+  ]);
 
   if (loading) {
     return (
@@ -509,214 +646,289 @@ export default function IPTVStreaming() {
           <Tv className="w-12 h-12 md:w-16 md:h-16 mx-auto mb-4 animate-pulse" />
           <p className="text-lg md:text-xl mb-2">Loading IPTV Channels...</p>
           <p className="text-gray-400 text-sm md:text-base">
-            {selectedCategory ? `Loading ${selectedCategory.category} category` :
-             selectedLanguage ? `Loading ${selectedLanguage.language_name} language` :
-             selectedCountry ? `Loading ${selectedCountry.name} country` :
-             selectedRegion ? `Loading ${selectedRegion.region_name || selectedRegion.name} region` :
-             "Fetching from iptv-org repository"}
+            {selectedCategory
+              ? `Loading ${selectedCategory.category} category`
+              : selectedLanguage
+              ? `Loading ${selectedLanguage.language_name} language`
+              : selectedCountry
+              ? `Loading ${selectedCountry.name} country`
+              : selectedRegion
+              ? `Loading ${
+                  selectedRegion.region_name || selectedRegion.name
+                } region`
+              : "Fetching from iptv-org repository"}
           </p>
         </div>
       </div>
-    )
+    );
   }
 
-  const SidebarContent = () => (
-    <div className="flex flex-col h-full">
-      <div className="p-4 border-b border-gray-800">
-        <label className="text-sm font-medium text-gray-300 mb-2 block">Playlist Type</label>
-        <Select
-          value={selectedCategory ? "categories" :
-                 selectedLanguage ? "languages" :
-                 selectedCountry ? "countries" :
-                 selectedRegion ? "regions" :
-                 selectedPlaylist}
-          onValueChange={(value) => {
-            setSelectedFilter("all")
-            if (value === "categories") setShowCategoryBrowser(true)
-            else if (value === "languages") setShowLanguageBrowser(true)
-            else if (value === "countries") setShowCountryBrowser(true)
-            else if (value === "regions") setShowRegionBrowser(true)
-            else setSelectedPlaylist(value)
-          }}
-        >
-          <SelectTrigger className="bg-gray-800 border-gray-700">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent className="bg-gray-800 border-gray-700">
-            {playlistOptions.map((option) => (
-              <SelectItem key={option.value} value={option.value} className="text-gray-300 hover:bg-gray-700">
-                <div className="flex items-center gap-2">
-                  {option.icon}
-                  <span>{option.label}</span>
+  const SidebarContent = () => {
+    const playlistValue = selectedCategory
+      ? "categories"
+      : selectedLanguage
+      ? "languages"
+      : selectedCountry
+      ? "countries"
+      : selectedRegion
+      ? "regions"
+      : selectedPlaylist;
+
+    return (
+      <div className="flex flex-col h-full">
+        <div className="p-4 border-b border-gray-800">
+          <label className="text-sm font-medium text-gray-300 mb-2 block">
+            Playlist Type
+          </label>
+          <Select
+            value={playlistValue}
+            onValueChange={(value: PlaylistType) => {
+              console.log("Selected playlist:", value);
+              setSelectedFilter("all");
+              setSelectedPlaylist(value);
+              if (value === "categories") setShowCategoryBrowser(true);
+              else if (value === "languages") setShowLanguageBrowser(true);
+              else if (value === "countries") setShowCountryBrowser(true);
+              else if (value === "regions") setShowRegionBrowser(true);
+            }}
+          >
+            <SelectTrigger className="bg-gray-800 border-gray-700">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="bg-gray-800 border-gray-700">
+              {playlistOptions.map((option) => (
+                <SelectItem
+                  key={option.value}
+                  value={option.value}
+                  className="text-gray-300 hover:bg-gray-700"
+                >
+                  <div className="flex items-center gap-2">
+                    {option.icon}
+                    <span>{option.label}</span>
+                  </div>
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {selectedCategory && (
+            <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-red-500/30">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    {selectedCategory.category}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {selectedCategory.channels.toLocaleString()} channels
+                  </p>
                 </div>
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-
-        {selectedCategory && (
-          <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-red-500/30">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-white">{selectedCategory.category}</p>
-                <p className="text-xs text-gray-400">{selectedCategory.channels.toLocaleString()} channels</p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowCategoryBrowser(true)}
+                  className="text-red-400 hover:text-red-300"
+                >
+                  Change
+                </Button>
               </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowCategoryBrowser(true)}
-                className="text-red-400 hover:text-red-300"
-              >
-                Change
-              </Button>
             </div>
-          </div>
-        )}
-
-        {selectedLanguage && (
-          <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-blue-500/30">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-white">{selectedLanguage.language_name}</p>
-                <p className="text-xs text-gray-400">{selectedLanguage.channels.toLocaleString()} channels</p>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowLanguageBrowser(true)}
-                className="text-blue-400 hover:text-blue-300"
-              >
-                Change
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {selectedCountry && (
-          <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-green-500/30">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-white">{selectedCountry.name}</p>
-                <p className="text-xs text-gray-400">{selectedCountry.channels.toLocaleString()} channels</p>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowCountryBrowser(true)}
-                className="text-green-400 hover:text-green-300"
-              >
-                Change
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {selectedRegion && (
-          <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-purple-500/30">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-white">{selectedRegion.region_name || selectedRegion.name}</p>
-                <p className="text-xs text-gray-400">{selectedRegion.channels.toLocaleString()} channels</p>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setShowRegionBrowser(true)}
-                className="text-purple-400 hover:text-purple-300"
-              >
-                Change
-              </Button>
-            </div>
-          </div>
-        )}
-
-        {availableFilters.length > 1 && !selectedCategory && !selectedLanguage && !selectedCountry && !selectedRegion && (
-          <div className="mt-3">
-            <label className="text-sm font-medium text-gray-300 mb-2 block">Filter</label>
-            <Select value={selectedFilter} onValueChange={setSelectedFilter}>
-              <SelectTrigger className="bg-gray-800 border-gray-700">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-gray-800 border-gray-700 max-h-60">
-                {availableFilters.map((filter) => (
-                  <SelectItem key={filter} value={filter} className="text-gray-300 hover:bg-gray-700">
-                    {filter === "all" ? "All" : filter}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
-      </div>
-
-      <ScrollArea className="flex-1">
-        <div className="p-4">
-          {viewMode === "grid" ? (
-            <ChannelGrid
-              channels={displayedChannels}
-              currentChannel={currentChannel}
-              onChannelSelect={handleChannelSelect}
-              onLoadMore={loadMoreChannels}
-              hasMore={displayedChannels.length < filteredChannels.length}
-              loading={loadingMore}
-            />
-          ) : (
-            <ChannelList
-              channels={displayedChannels}
-              currentChannel={currentChannel}
-              onChannelSelect={handleChannelSelect}
-              onLoadMore={loadMoreChannels}
-              hasMore={displayedChannels.length < filteredChannels.length}
-              loading={loadingMore}
-            />
           )}
-        </div>
-      </ScrollArea>
 
-      <div className="p-4 border-t border-gray-800 text-center">
-        <p className="text-xs text-gray-400">
-          Showing {displayedChannels.length} of {filteredChannels.length.toLocaleString()} channels
-        </p>
-        <p className="text-xs text-gray-500 mt-1">Powered by iptv-org</p>
+          {selectedLanguage && (
+            <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-blue-500/30">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    {selectedLanguage.language_name}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {selectedLanguage.channels.toLocaleString()} channels
+                  </p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowLanguageBrowser(true)}
+                  className="text-blue-400 hover:text-blue-300"
+                >
+                  Change
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {selectedCountry && (
+            <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-green-500/30">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    {selectedCountry.name}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {selectedCountry.channels.toLocaleString()} channels
+                  </p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowCountryBrowser(true)}
+                  className="text-green-400 hover:text-green-300"
+                >
+                  Change
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {selectedRegion && (
+            <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-purple-500/30">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-white">
+                    {selectedRegion.region_name || selectedRegion.name}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    {selectedRegion.channels.toLocaleString()} channels
+                  </p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowRegionBrowser(true)}
+                  className="text-purple-400 hover:text-purple-300"
+                >
+                  Change
+                </Button>
+              </div>
+            </div>
+          )}
+
+          {availableFilters.length > 1 &&
+            !selectedCategory &&
+            !selectedLanguage &&
+            !selectedCountry &&
+            !selectedRegion && (
+              <div className="mt-3">
+                <label className="text-sm font-medium text-gray-300 mb-2 block">
+                  Filter
+                </label>
+                <Select
+                  value={selectedFilter}
+                  onValueChange={setSelectedFilter}
+                >
+                  <SelectTrigger className="bg-gray-800 border-gray-700">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-gray-800 border-gray-700 max-h-60">
+                    {availableFilters.map((filter) => (
+                      <SelectItem
+                        key={filter}
+                        value={filter}
+                        className="text-gray-300 hover:bg-gray-700"
+                      >
+                        {filter === "all" ? "All" : filter}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            )}
+        </div>
+
+        <ScrollArea className="flex-1">
+          <div className="p-4">
+            {viewMode === "grid" ? (
+              <ChannelGrid
+                channels={displayedChannels}
+                currentChannel={currentChannel}
+                onChannelSelect={handleChannelSelect}
+                onLoadMore={loadMoreChannels}
+                hasMore={displayedChannels.length < filteredChannels.length}
+                loading={loadingMore}
+              />
+            ) : (
+              <ChannelList
+                channels={displayedChannels}
+                currentChannel={currentChannel}
+                onChannelSelect={handleChannelSelect}
+                onLoadMore={loadMoreChannels}
+                hasMore={displayedChannels.length < filteredChannels.length}
+                loading={loadingMore}
+              />
+            )}
+          </div>
+        </ScrollArea>
+
+        <div className="p-4 border-t border-gray-800 text-center">
+          <p className="text-xs text-gray-400">
+            Showing {displayedChannels.length} of{" "}
+            {filteredChannels.length.toLocaleString()} channels
+          </p>
+          <p className="text-xs text-gray-500 mt-1">Powered by iptv-org</p>
+        </div>
       </div>
-    </div>
-  )
+    );
+  };
 
   return (
     <div className="min-h-screen bg-black text-white">
       <Sheet open={showCategoryBrowser} onOpenChange={setShowCategoryBrowser}>
-        <SheetContent side="right" className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0">
+        <SheetContent
+          side="right"
+          className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0"
+        >
           <SheetHeader className="p-4 border-b border-gray-800">
             <SheetTitle className="text-white">Browse Categories</SheetTitle>
           </SheetHeader>
-          <CategoryBrowser categories={categories} onCategorySelect={handleCategorySelect} />
+          <CategoryBrowser
+            categories={categories}
+            onCategorySelect={handleCategorySelect}
+          />
         </SheetContent>
       </Sheet>
 
       <Sheet open={showLanguageBrowser} onOpenChange={setShowLanguageBrowser}>
-        <SheetContent side="right" className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0">
+        <SheetContent
+          side="right"
+          className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0"
+        >
           <SheetHeader className="p-4 border-b border-gray-800">
             <SheetTitle className="text-white">Browse Languages</SheetTitle>
           </SheetHeader>
-          <LanguageBrowser languages={languages} onLanguageSelect={handleLanguageSelect} />
+          <LanguageBrowser
+            languages={languages}
+            onLanguageSelect={handleLanguageSelect}
+          />
         </SheetContent>
       </Sheet>
 
       <Sheet open={showCountryBrowser} onOpenChange={setShowCountryBrowser}>
-        <SheetContent side="right" className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0">
+        <SheetContent
+          side="right"
+          className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0"
+        >
           <SheetHeader className="p-4 border-b border-gray-800">
             <SheetTitle className="text-white">Browse Countries</SheetTitle>
           </SheetHeader>
-          <CountryBrowser countries={countries} onCountrySelect={handleCountrySelect} />
+          <CountryBrowser
+            countries={countries}
+            onCountrySelect={handleCountrySelect}
+          />
         </SheetContent>
       </Sheet>
 
       <Sheet open={showRegionBrowser} onOpenChange={setShowRegionBrowser}>
-        <SheetContent side="right" className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0">
+        <SheetContent
+          side="right"
+          className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0"
+        >
           <SheetHeader className="p-4 border-b border-gray-800">
             <SheetTitle className="text-white">Browse Regions</SheetTitle>
           </SheetHeader>
-          <RegionBrowser regions={regions} onRegionSelect={handleRegionSelect} />
+          <RegionBrowser
+            regions={regions}
+            onRegionSelect={handleRegionSelect}
+          />
         </SheetContent>
       </Sheet>
 
@@ -730,11 +942,16 @@ export default function IPTVStreaming() {
               <div>
                 <h1 className="text-lg md:text-xl font-bold">IPTV Stream</h1>
                 <p className="text-xs text-white hidden sm:block">
-                  {selectedCategory ? selectedCategory.category :
-                   selectedLanguage ? selectedLanguage.language_name :
-                   selectedCountry ? selectedCountry.name :
-                   selectedRegion ? selectedRegion.region_name || selectedRegion.name :
-                   `${totalChannels.toLocaleString()} channels`} • iptv-org
+                  {selectedCategory
+                    ? selectedCategory.category
+                    : selectedLanguage
+                    ? selectedLanguage.language_name
+                    : selectedCountry
+                    ? selectedCountry.name
+                    : selectedRegion
+                    ? selectedRegion.region_name || selectedRegion.name
+                    : `${totalChannels.toLocaleString()} channels`}{" "}
+                  • iptv-org
                 </p>
               </div>
             </div>
@@ -782,7 +999,10 @@ export default function IPTVStreaming() {
                     <Menu className="w-5 h-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0">
+                <SheetContent
+                  side="right"
+                  className="w-full sm:w-96 bg-gray-900 border-gray-800 p-0"
+                >
                   <SheetHeader className="p-4 border-b border-gray-800">
                     <SheetTitle className="text-white flex items-center justify-between">
                       Channels
@@ -846,23 +1066,34 @@ export default function IPTVStreaming() {
                   alt={currentChannel.name}
                   className="w-12 h-8 md:w-16 md:h-10 object-contain bg-gray-800 rounded"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = "/placeholder.svg?height=60&width=100&text=TV"
+                    (e.target as HTMLImageElement).src =
+                      "/placeholder.svg?height=60&width=100&text=TV";
                   }}
                 />
                 <div className="flex-1 min-w-0">
-                  <h2 className="text-lg md:text-xl font-bold truncate">{currentChannel.name}</h2>
+                  <h2 className="text-lg md:text-xl font-bold truncate">
+                    {currentChannel.name}
+                  </h2>
                   <div className="flex gap-1 md:gap-2 mt-1 flex-wrap">
                     {currentChannel.category && (
-                      <Badge variant="secondary" className="text-xs">{currentChannel.category}</Badge>
+                      <Badge variant="secondary" className="text-xs">
+                        {currentChannel.category}
+                      </Badge>
                     )}
                     {currentChannel.country && (
-                      <Badge variant="outline" className="text-gray-300 text-xs hidden sm:flex">
+                      <Badge
+                        variant="outline"
+                        className="text-gray-300 text-xs hidden sm:flex"
+                      >
                         <Globe className="w-3 h-3 mr-1" />
                         {currentChannel.country}
                       </Badge>
                     )}
                     {currentChannel.language && (
-                      <Badge variant="outline" className="text-gray-300 text-xs hidden md:flex">
+                      <Badge
+                        variant="outline"
+                        className="text-gray-300 text-xs hidden md:flex"
+                      >
                         <Languages className="w-3 h-3 mr-1" />
                         {currentChannel.language}
                       </Badge>
@@ -883,5 +1114,5 @@ export default function IPTVStreaming() {
         </div>
       </div>
     </div>
-  )
+  );
 }

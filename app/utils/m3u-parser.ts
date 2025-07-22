@@ -11,49 +11,61 @@ interface Channel {
   source?: string;
 }
 
-// CORS proxy options for fetching M3U files and video streams
+// Updated CORS proxy options with more reliable services
 const CORS_PROXIES = [
   "https://api.allorigins.win/raw?url=",
   "https://corsproxy.io/?",
-];
-
-// Video CORS proxies (specialized for streaming)
-const VIDEO_CORS_PROXIES = [
   "https://cors-anywhere.herokuapp.com/",
-  "https://api.allorigins.win/raw?url=",
+  "https://thingproxy.freeboard.io/fetch/",
 ];
 
-export async function fetchPlaylist(
-  url: string,
-  type?: string,
-  filterValue?: string
-): Promise<Channel[]> {
+export async function fetchPlaylist(url: string): Promise<Channel[]> {
   try {
     console.log(`Fetching playlist from: ${url}`);
 
-    // Try to fetch the real M3U playlist first
-    const channels = await fetchRealPlaylist(url);
+    // Try server-side proxy first (most reliable)
+    const channels = await fetchViaServerProxy(url);
     if (channels.length > 0) {
       return channels;
+    }
+
+    // Fallback to client-side CORS proxies
+    const corsChannels = await fetchRealPlaylist(url);
+    if (corsChannels.length > 0) {
+      return corsChannels;
     }
 
     throw new Error("No channels found");
   } catch (error) {
     console.error("Failed to fetch playlist:", error);
-
-    // Generate fallback data based on type and filter
-    if (type === "language" && filterValue) {
-      return generateLanguageFallback(filterValue, 100); // Default fallback count
-    } else if (type === "country" && filterValue) {
-      return generateCountryFallback(filterValue, 100, null);
-    } else if (type === "region" && filterValue) {
-      return generateRegionFallback(filterValue, 100);
-    } else if (type === "category" && filterValue) {
-      return generateRealCategoryFallback(filterValue, 100);
-    }
-
-    return generateSampleChannels();
+    throw error;
   }
+}
+
+// New function to use server-side proxy
+async function fetchViaServerProxy(url: string): Promise<Channel[]> {
+  try {
+    const response = await fetch("/api/proxy/playlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success && data.content) {
+        const channels = parseM3U(data.content);
+        console.log(`Server proxy: Parsed ${channels.length} channels`);
+        return channels.filter(isStreamAccessible);
+      }
+    }
+  } catch (error) {
+    console.log("Server proxy failed:", error);
+  }
+
+  return [];
 }
 
 export function parseM3U(m3uContent: string): Channel[] {
@@ -183,7 +195,7 @@ function isValidUrl(url: string): boolean {
 function isStreamAccessible(channel: Channel): boolean {
   const url = channel.url.toLowerCase();
 
-  // List of domains/patterns known to have CORS restrictions
+  // Expanded list of domains/patterns known to have CORS restrictions
   const corsRestrictedDomains = [
     "pluto.tv",
     "plutotv.com",
@@ -202,6 +214,19 @@ function isStreamAccessible(channel: Channel): boolean {
     "mtlivestream.site",
     "bloomberg.com",
     "www.btvlive.gov.bd",
+    "youtube.com",
+    "youtu.be",
+    "facebook.com",
+    "fb.com",
+    "instagram.com",
+    "twitter.com",
+    "tiktok.com",
+    "twitch.tv",
+    "dailymotion.com",
+    "vimeo.com",
+    "tv.cdn.xsg.ge",
+    "stream.oursnetworktv.com"
+
   ];
 
   // Check if URL contains any CORS-restricted domains
@@ -209,7 +234,7 @@ function isStreamAccessible(channel: Channel): boolean {
     url.includes(domain)
   );
 
-  // Filter out HTTP streams (mixed content issues)
+  // Prefer HTTPS streams (mixed content issues)
   const isHttps = url.startsWith("https://");
 
   // Filter out IP-based URLs (often blocked)
@@ -221,84 +246,81 @@ function isStreamAccessible(channel: Channel): boolean {
   return !hasCorsRestriction && isHttps && !hasIpAddress && !hasExpiredToken;
 }
 
+// Updated function to get proxied stream URL
 export function getProxiedStreamUrl(originalUrl: string): string {
-  // For now, return original URL
-  // In production, you might want to use a video proxy service
-  return originalUrl;
+  // Use server-side proxy for streaming
+  return `/api/proxy/stream?url=${encodeURIComponent(originalUrl)}`;
 }
 
-function generateSampleChannels(): Channel[] {
-  // This will be used as fallback when the real M3U can't be loaded
-  const sampleChannels: Channel[] = [
-    {
-      id: "1",
-      name: "BBC News",
-      url: "https://d2vnbkvjbims7j.cloudfront.net/containerA/LTN/playlist.m3u8",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/BBC_News_2019.svg/320px-BBC_News_2019.svg.png",
-      category: "News",
-      country: "United Kingdom",
-      language: "English",
-      region: "Europe",
-      source: "BBC",
-    },
-    {
-      id: "2",
-      name: "Al Jazeera English",
-      url: "https://live-hls-web-aje.getaj.net/AJE/index.m3u8",
-      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Aljazeera_eng.svg/320px-Aljazeera_eng.svg.png",
-      category: "News",
-      country: "Qatar",
-      language: "English",
-      region: "Middle East",
-      source: "Al Jazeera",
-    },
-    {
-      id: "3",
-      name: "France 24",
-      url: "https://static.france24.com/live/F24_EN_LO_HLS/live_web.m3u8",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/France24.png/320px-France24.png",
-      category: "News",
-      country: "France",
-      language: "English",
-      region: "Europe",
-      source: "France 24",
-    },
-    {
-      id: "4",
-      name: "NASA TV",
-      url: "https://ntv1.akamaized.net/hls/live/2014075/NASA-NTV1-HLS/master.m3u8",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/NASA_logo.svg/320px-NASA_logo.svg.png",
-      category: "Education",
-      country: "United States",
-      language: "English",
-      region: "North America",
-      source: "NASA",
-    },
-    {
-      id: "5",
-      name: "Red Bull TV",
-      url: "https://rbmn-live.akamaized.net/hls/live/590964/BoRB-AT/master.m3u8",
-      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/d4/Red_Bull_TV_logo.svg/320px-Red_Bull_TV_logo.svg.png",
-      category: "Sports",
-      country: "Austria",
-      language: "English",
-      region: "Europe",
-      source: "Red Bull",
-    },
-    {
-      id: "6",
-      name: "DW English",
-      url: "https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/index.m3u8",
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Deutsche_Welle_symbol_2012.svg/320px-Deutsche_Welle_symbol_2012.svg.png",
-      category: "News",
-      country: "Germany",
-      language: "English",
-      region: "Europe",
-      source: "Deutsche Welle",
-    },
-  ];
+async function fetchRealPlaylist(url: string): Promise<Channel[]> {
+  let m3uContent = "";
+  let fetchSuccess = false;
 
-  return sampleChannels;
+  // Try direct fetch first with proper CORS headers
+  try {
+    const response = await fetch(url, {
+      mode: "cors",
+      headers: {
+        Accept:
+          "application/x-mpegURL, application/vnd.apple.mpegurl, application/octet-stream, */*",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        Origin: window.location.origin,
+      },
+    });
+
+    if (response.ok) {
+      m3uContent = await response.text();
+      fetchSuccess = true;
+      console.log("Direct fetch successful");
+    }
+  } catch (error) {
+    console.log("Direct fetch failed, trying CORS proxies...");
+  }
+
+  // If direct fetch failed, try CORS proxies with better error handling
+  if (!fetchSuccess) {
+    for (const proxy of CORS_PROXIES) {
+      try {
+        const proxyUrl = proxy + encodeURIComponent(url);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+        const response = await fetch(proxyUrl, {
+          signal: controller.signal,
+          headers: {
+            "User-Agent":
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+          },
+        });
+
+        clearTimeout(timeoutId);
+
+        if (response.ok) {
+          m3uContent = await response.text();
+          fetchSuccess = true;
+          console.log(`Fetch successful via proxy: ${proxy}`);
+          break;
+        }
+      } catch (error) {
+        console.log(`Proxy ${proxy} failed:`, error);
+        continue;
+      }
+    }
+  }
+
+  if (fetchSuccess && m3uContent) {
+    const channels = parseM3U(m3uContent);
+    console.log(`Parsed ${channels.length} channels from M3U`);
+
+    // Filter out CORS-restricted channels
+    const accessibleChannels = channels.filter(isStreamAccessible);
+    console.log(`Filtered to ${accessibleChannels.length} accessible channels`);
+
+    return accessibleChannels;
+  }
+
+  throw new Error("Failed to fetch real playlist");
 }
 
 export function getPlaylistUrl(type: string, filter?: string): string {
@@ -332,287 +354,4 @@ export function getPlaylistUrl(type: string, filter?: string): string {
     default:
       return `${baseUrl}/index.m3u`;
   }
-}
-
-async function fetchRealPlaylist(url: string): Promise<Channel[]> {
-  let m3uContent = "";
-  let fetchSuccess = false;
-
-  // Try direct fetch first
-  try {
-    const response = await fetch(url, {
-      mode: "cors",
-      headers: {
-        Accept:
-          "application/x-mpegURL, application/vnd.apple.mpegurl, application/octet-stream, */*",
-      },
-    });
-
-    if (response.ok) {
-      m3uContent = await response.text();
-      fetchSuccess = true;
-      console.log("Direct fetch successful");
-    }
-  } catch (error) {
-    console.log("Direct fetch failed, trying CORS proxies...");
-  }
-
-  // If direct fetch failed, try CORS proxies
-  if (!fetchSuccess) {
-    for (const proxy of CORS_PROXIES) {
-      try {
-        const proxyUrl = proxy + encodeURIComponent(url);
-        const response = await fetch(proxyUrl);
-
-        if (response.ok) {
-          m3uContent = await response.text();
-          fetchSuccess = true;
-          console.log(`Fetch successful via proxy: ${proxy}`);
-          break;
-        }
-      } catch (error) {
-        console.log(`Proxy ${proxy} failed:`, error);
-        continue;
-      }
-    }
-  }
-
-  if (fetchSuccess && m3uContent) {
-    const channels = parseM3U(m3uContent);
-    console.log(`Parsed ${channels.length} channels from M3U`);
-
-    // Filter out CORS-restricted channels
-    const accessibleChannels = channels.filter(isStreamAccessible);
-    console.log(`Filtered to ${accessibleChannels.length} accessible channels`);
-
-    return accessibleChannels;
-  }
-
-  throw new Error("Failed to fetch real playlist");
-}
-
-function generateLanguageFallback(
-  languageName: string,
-  channelCount: number
-): Channel[] {
-  const fallbackChannels: Channel[] = [];
-  const sampleCount = Math.min(20, Math.max(5, Math.floor(channelCount / 100)));
-
-  for (let i = 1; i <= sampleCount; i++) {
-    fallbackChannels.push({
-      id: `${languageName.toLowerCase().replace(/\s+/g, "_")}_${i}`,
-      name: `${languageName} Channel ${i}`,
-      url: `https://example.com/streams/${languageName
-        .toLowerCase()
-        .replace(/\s+/g, "_")}${i}.m3u8`,
-      logo: `/placeholder.svg?height=60&width=100&text=${languageName
-        .substring(0, 4)
-        .toUpperCase()}${i}`,
-      language: languageName,
-      country: getLanguageCountry(languageName),
-      category: "General",
-    });
-  }
-  return fallbackChannels;
-}
-
-function generateCountryFallback(
-  countryName: string,
-  channelCount: number,
-  flag: string | null
-): Channel[] {
-  const fallbackChannels: Channel[] = [];
-  const sampleCount = Math.min(25, Math.max(5, Math.floor(channelCount / 50)));
-
-  for (let i = 1; i <= sampleCount; i++) {
-    fallbackChannels.push({
-      id: `${countryName.toLowerCase().replace(/\s+/g, "_")}_${i}`,
-      name: `${countryName} TV ${i}`,
-      url: `https://example.com/streams/${countryName
-        .toLowerCase()
-        .replace(/\s+/g, "_")}${i}.m3u8`,
-      logo: `/placeholder.svg?height=60&width=100&text=${
-        flag || countryName.substring(0, 2).toUpperCase()
-      }${i}`,
-      country: countryName,
-      language: getCountryLanguage(countryName),
-      category: getCountryCategory(i),
-    });
-  }
-  return fallbackChannels;
-}
-
-function generateRegionFallback(
-  regionName: string,
-  channelCount: number
-): Channel[] {
-  const fallbackChannels: Channel[] = [];
-  const sampleCount = Math.min(30, Math.max(8, Math.floor(channelCount / 100)));
-
-  for (let i = 1; i <= sampleCount; i++) {
-    fallbackChannels.push({
-      id: `${regionName.toLowerCase().replace(/\s+/g, "_")}_${i}`,
-      name: `${regionName} Network ${i}`,
-      url: `https://example.com/streams/${regionName
-        .toLowerCase()
-        .replace(/\s+/g, "_")}${i}.m3u8`,
-      logo: `/placeholder.svg?height=60&width=100&text=${regionName
-        .substring(0, 4)
-        .toUpperCase()}${i}`,
-      region: regionName,
-      language: getRegionLanguage(regionName),
-      country: getRegionCountry(regionName),
-      category: getRegionCategory(i),
-    });
-  }
-  return fallbackChannels;
-}
-
-function generateRealCategoryFallback(
-  categoryName: string,
-  channelCount: number
-): Channel[] {
-  const fallbackChannels: Channel[] = [];
-  const sampleCount = Math.min(30, Math.max(10, Math.floor(channelCount / 20)));
-
-  for (let i = 1; i <= sampleCount; i++) {
-    fallbackChannels.push({
-      id: `${categoryName.toLowerCase()}_real_${i}`,
-      name: `${categoryName} Channel ${i}`,
-      url: `https://example.com/category/${categoryName.toLowerCase()}${i}.m3u8`,
-      logo: `/placeholder.svg?height=60&width=100&text=${categoryName
-        .substring(0, 4)
-        .toUpperCase()}${i}`,
-      category: categoryName,
-      country: getCategoryCountry(categoryName, i),
-      language: getCategoryLanguage(categoryName, i),
-    });
-  }
-  return fallbackChannels;
-}
-
-// Helper functions for realistic data
-function getLanguageCountry(languageName: string): string {
-  const languageCountryMap: { [key: string]: string } = {
-    English: "United States",
-    Spanish: "Spain",
-    French: "France",
-    German: "Germany",
-    Italian: "Italy",
-    Portuguese: "Portugal",
-    Russian: "Russia",
-    Chinese: "China",
-    Japanese: "Japan",
-    Korean: "South Korea",
-    Arabic: "Saudi Arabia",
-    Hindi: "India",
-    Turkish: "Turkey",
-    Dutch: "Netherlands",
-    Polish: "Poland",
-    Persian: "Iran",
-    Urdu: "Pakistan",
-    Bengali: "Bangladesh",
-    Vietnamese: "Vietnam",
-    Thai: "Thailand",
-  };
-  return languageCountryMap[languageName] || "Various";
-}
-
-function getCountryLanguage(countryName: string): string {
-  const countryLanguageMap: { [key: string]: string } = {
-    "United States": "English",
-    Spain: "Spanish",
-    France: "French",
-    Germany: "German",
-    Italy: "Italian",
-    Portugal: "Portuguese",
-    Russia: "Russian",
-    China: "Chinese",
-    Japan: "Japanese",
-    "South Korea": "Korean",
-    "Saudi Arabia": "Arabic",
-    India: "Hindi",
-    Turkey: "Turkish",
-    Netherlands: "Dutch",
-    Poland: "Polish",
-    Iran: "Persian",
-    Pakistan: "Urdu",
-    Bangladesh: "Bengali",
-    Vietnam: "Vietnamese",
-    Thailand: "Thai",
-  };
-  return countryLanguageMap[countryName] || "Local";
-}
-
-function getCountryCategory(index: number): string {
-  const categories = [
-    "News",
-    "Entertainment",
-    "Sports",
-    "Music",
-    "Movies",
-    "Education",
-    "Kids",
-    "Documentary",
-  ];
-  return categories[index % categories.length];
-}
-
-function getRegionLanguage(regionName: string): string {
-  if (regionName.includes("Europe")) return "Various European";
-  if (regionName.includes("America")) return "English/Spanish";
-  if (regionName.includes("Asia")) return "Various Asian";
-  if (regionName.includes("Africa")) return "Various African";
-  if (regionName.includes("Middle East")) return "Arabic";
-  if (regionName.includes("Arab")) return "Arabic";
-  return "Various";
-}
-
-function getRegionCountry(regionName: string): string {
-  if (regionName.includes("North America")) return "United States";
-  if (regionName.includes("Europe")) return "Germany";
-  if (regionName.includes("Asia")) return "China";
-  if (regionName.includes("Africa")) return "South Africa";
-  if (regionName.includes("Middle East")) return "Saudi Arabia";
-  return "Various";
-}
-
-function getRegionCategory(index: number): string {
-  const categories = [
-    "General",
-    "News",
-    "Entertainment",
-    "Sports",
-    "Culture",
-    "Education",
-    "Music",
-    "Movies",
-  ];
-  return categories[index % categories.length];
-}
-
-function getCategoryCountry(category: string, index: number): string {
-  const countries = [
-    "United States",
-    "United Kingdom",
-    "Germany",
-    "France",
-    "Spain",
-    "Italy",
-    "Canada",
-    "Australia",
-  ];
-  return countries[index % countries.length];
-}
-
-function getCategoryLanguage(category: string, index: number): string {
-  const languages = [
-    "English",
-    "Spanish",
-    "French",
-    "German",
-    "Italian",
-    "Portuguese",
-  ];
-  return languages[index % languages.length];
 }
