@@ -3,7 +3,6 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
@@ -22,7 +21,6 @@ import {
 import {
   Tv,
   Search,
-  Play,
   Grid3X3,
   List,
   Globe,
@@ -40,7 +38,7 @@ import CategoryBrowser from "./components/category-browser";
 import LanguageBrowser from "./components/language-browser";
 import CountryBrowser from "./components/country-browser";
 import RegionBrowser from "./components/region-browser";
-import { fetchPlaylist, getProxiedStreamUrl } from "./utils/m3u-parser";
+import { fetchPlaylist } from "./utils/m3u-parser";
 import categoriesData from "../data/categories.json";
 import languagesData from "../data/language.json";
 import countriesData from "../data/countries.json";
@@ -184,10 +182,10 @@ export default function IPTVStreaming() {
     setSelectedLanguage(null);
     setSelectedCountry(null);
     setSelectedRegion(null);
-    setSelectedFilter("all"); // Reset filter to ensure compatibility with new playlist
+    setSelectedFilter("all");
     setCurrentPage(1);
     setLoading(true);
-    setAllChannels([]); // Clear channels to prevent stale data
+    setAllChannels([]);
     setDisplayedChannels([]);
     setTotalChannels(0);
   }, []);
@@ -380,7 +378,7 @@ export default function IPTVStreaming() {
       setSelectedRegion(null);
       setSelectedPlaylist("categories");
       setShowCategoryBrowser(false);
-      loadCategoryPlaylist(category); // Load immediately
+      loadCategoryPlaylist(category);
     },
     [loadCategoryPlaylist]
   );
@@ -393,7 +391,7 @@ export default function IPTVStreaming() {
       setSelectedRegion(null);
       setSelectedPlaylist("languages");
       setShowLanguageBrowser(false);
-      loadLanguagePlaylist(language); // Load immediately
+      loadLanguagePlaylist(language);
     },
     [loadLanguagePlaylist]
   );
@@ -406,7 +404,7 @@ export default function IPTVStreaming() {
       setSelectedRegion(null);
       setSelectedPlaylist("countries");
       setShowCountryBrowser(false);
-      loadCountryPlaylist(country); // Load immediately
+      loadCountryPlaylist(country);
     },
     [loadCountryPlaylist]
   );
@@ -419,7 +417,7 @@ export default function IPTVStreaming() {
       setSelectedCountry(null);
       setSelectedPlaylist("regions");
       setShowRegionBrowser(false);
-      loadRegionPlaylist(region); // Load immediately
+      loadRegionPlaylist(region);
     },
     [loadRegionPlaylist]
   );
@@ -464,7 +462,7 @@ export default function IPTVStreaming() {
               ? `Loading ${selectedCountry.name} country`
               : selectedRegion
               ? `Loading ${
-                  selectedRegion.region_name || selectedRegion.name
+                  selectedRegion.region_name || "Unknown Region"
                 } region`
               : "Fetching from iptv-org repository"}
           </p>
@@ -493,13 +491,13 @@ export default function IPTVStreaming() {
           <Select
             value={playlistValue}
             onValueChange={(value: PlaylistType) => {
-              setSelectedFilter("all"); // Reset filter when changing playlist type
+              setSelectedFilter("all");
               setSelectedPlaylist(value);
               if (value === "categories") setShowCategoryBrowser(true);
               else if (value === "languages") setShowLanguageBrowser(true);
               else if (value === "countries") setShowCountryBrowser(true);
               else if (value === "regions") setShowRegionBrowser(true);
-              else loadPlaylist(value); // Load immediately for non-browser playlists
+              else loadPlaylist(value);
             }}
           >
             <SelectTrigger className="bg-gray-800 border-gray-700">
@@ -591,7 +589,7 @@ export default function IPTVStreaming() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-white">
-                    {selectedRegion.region_name || selectedRegion.name}
+                    {selectedRegion.region_name || "Unknown Region"}
                   </p>
                   <p className="text-xs text-gray-400">
                     {selectedRegion.channels.toLocaleString()} channels
@@ -754,7 +752,7 @@ export default function IPTVStreaming() {
                     : selectedCountry
                     ? selectedCountry.name
                     : selectedRegion
-                    ? selectedRegion.region_name || selectedRegion.name
+                    ? selectedRegion.region_name || "Unknown Region"
                     : `${totalChannels.toLocaleString()} channels`}{" "}
                   • iptv-org
                 </p>
@@ -856,7 +854,7 @@ export default function IPTVStreaming() {
           <div className="flex-1 bg-black relative">
             {currentChannel && (
               <VideoPlayer
-                src={getProxiedStreamUrl(currentChannel.url)}
+                src={currentChannel.url}
                 title={currentChannel.name}
                 poster={currentChannel.logo}
               />
