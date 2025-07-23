@@ -45,45 +45,15 @@ import categoriesData from "../data/categories.json";
 import languagesData from "../data/language.json";
 import countriesData from "../data/countries.json";
 import regionsData from "../data/region.json";
-
-interface Channel {
-  id: string;
-  name: string;
-  url: string;
-  logo?: string;
-  category?: string;
-  country?: string;
-  language?: string;
-  region?: string;
-  source?: string;
-}
-
-interface Category {
-  category: string;
-  channels: number;
-  playlist: string;
-}
-
-interface Language {
-  language_name: string;
-  channels: number;
-  playlist_url: string;
-}
-
-interface Country {
-  name: string;
-  flag: string | null;
-  channels: number;
-  playlist_url: string;
-  subdivisions: any[];
-}
-
-interface Region {
-  region_name?: string;
-  name?: string;
-  channels: number;
-  playlist_url: string;
-}
+import {
+  Category,
+  Channel,
+  Country,
+  Language,
+  Region,
+} from "@/interface/interface";
+import { PLAYLIST_URLS } from "./utils/playlist";
+import CurrentChannelInfo from "./components/current-channel-info";
 
 type PlaylistType =
   | "main"
@@ -92,15 +62,6 @@ type PlaylistType =
   | "countries"
   | "regions"
   | "sources";
-
-const PLAYLIST_URLS = {
-  main: "https://iptv-org.github.io/iptv/index.m3u",
-  categories: "https://iptv-org.github.io/iptv/categories/",
-  languages: "https://iptv-org.github.io/iptv/languages/",
-  countries: "https://iptv-org.github.io/iptv/countries/",
-  regions: "https://iptv-org.github.io/iptv/regions/",
-  sources: "https://iptv-org.github.io/iptv/sources/",
-};
 
 const CHANNELS_PER_PAGE = 50;
 const INITIAL_LOAD_LIMIT = 50;
@@ -223,8 +184,12 @@ export default function IPTVStreaming() {
     setSelectedLanguage(null);
     setSelectedCountry(null);
     setSelectedRegion(null);
+    setSelectedFilter("all"); // Reset filter to ensure compatibility with new playlist
     setCurrentPage(1);
     setLoading(true);
+    setAllChannels([]); // Clear channels to prevent stale data
+    setDisplayedChannels([]);
+    setTotalChannels(0);
   }, []);
 
   const loadPlaylist = useCallback(
@@ -284,21 +249,11 @@ export default function IPTVStreaming() {
         setTotalChannels(category.channels);
         if (channels.length > 0) setCurrentChannel(channels[0]);
         setAvailableFilters(["all"]);
-        setSelectedFilter("all");
       } catch (error) {
         console.error(`Failed to load ${category.category} playlist:`, error);
         alert(
           `Failed to load ${category.category} playlist. Using fallback data.`
         );
-        const fallback = generateFallbackChannels(
-          "category",
-          category.category,
-          category.channels
-        );
-        setAllChannels(fallback);
-        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
-        setTotalChannels(category.channels);
-        if (fallback.length > 0) setCurrentChannel(fallback[0]);
       } finally {
         setLoading(false);
       }
@@ -317,7 +272,6 @@ export default function IPTVStreaming() {
         setTotalChannels(language.channels);
         if (channels.length > 0) setCurrentChannel(channels[0]);
         setAvailableFilters(["all"]);
-        setSelectedFilter("all");
       } catch (error) {
         console.error(
           `Failed to load ${language.language_name} playlist:`,
@@ -326,15 +280,6 @@ export default function IPTVStreaming() {
         alert(
           `Failed to load ${language.language_name} playlist. Using fallback data.`
         );
-        const fallback = generateFallbackChannels(
-          "language",
-          language.language_name,
-          language.channels
-        );
-        setAllChannels(fallback);
-        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
-        setTotalChannels(language.channels);
-        if (fallback.length > 0) setCurrentChannel(fallback[0]);
       } finally {
         setLoading(false);
       }
@@ -353,20 +298,9 @@ export default function IPTVStreaming() {
         setTotalChannels(country.channels);
         if (channels.length > 0) setCurrentChannel(channels[0]);
         setAvailableFilters(["all"]);
-        setSelectedFilter("all");
       } catch (error) {
         console.error(`Failed to load ${country.name} playlist:`, error);
         alert(`Failed to load ${country.name} playlist. Using fallback data.`);
-        const fallback = generateFallbackChannels(
-          "country",
-          country.name,
-          country.channels,
-          country.flag
-        );
-        setAllChannels(fallback);
-        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
-        setTotalChannels(country.channels);
-        if (fallback.length > 0) setCurrentChannel(fallback[0]);
       } finally {
         setLoading(false);
       }
@@ -386,171 +320,15 @@ export default function IPTVStreaming() {
         setTotalChannels(region.channels);
         if (channels.length > 0) setCurrentChannel(channels[0]);
         setAvailableFilters(["all"]);
-        setSelectedFilter("all");
       } catch (error) {
         console.error(`Failed to load ${regionName} playlist:`, error);
         alert(`Failed to load ${regionName} playlist. Using fallback data.`);
-        const fallback = generateFallbackChannels(
-          "region",
-          regionName,
-          region.channels
-        );
-        setAllChannels(fallback);
-        setDisplayedChannels(fallback.slice(0, CHANNELS_PER_PAGE));
-        setTotalChannels(region.channels);
-        if (fallback.length > 0) setCurrentChannel(fallback[0]);
       } finally {
         setLoading(false);
       }
     },
     [resetState]
   );
-
-  const generateFallbackChannels = useCallback(
-    (
-      type: "category" | "language" | "country" | "region",
-      name: string,
-      channelCount: number,
-      flag?: string | null
-    ): Channel[] => {
-      const sampleCount = Math.min(
-        30,
-        Math.max(5, Math.floor(channelCount / 50))
-      );
-      const channels: Channel[] = [];
-      const prefix = name.toLowerCase().replace(/\s+/g, "_");
-
-      for (let i = 1; i <= sampleCount; i++) {
-        const channel: Channel = {
-          id: `${prefix}_${i}`,
-          name: `${name} Channel ${i}`,
-          url: "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8",
-          logo: `/placeholder.svg?height=60&width=100&text=${(
-            flag || name.substring(0, 4)
-          ).toUpperCase()}${i}`,
-        };
-        if (type === "category") channel.category = name;
-        if (type === "language") {
-          channel.language = name;
-          channel.country = getLanguageCountry(name);
-          channel.category = "General";
-        }
-        if (type === "country") {
-          channel.country = name;
-          channel.language = getCountryLanguage(name);
-          channel.category = getCountryCategory(i);
-        }
-        if (type === "region") {
-          channel.region = name;
-          channel.country = getRegionCountry(name);
-          channel.language = getRegionLanguage(name);
-          channel.category = getRegionCategory(i);
-        }
-        channels.push(channel);
-      }
-      return channels;
-    },
-    []
-  );
-
-  const getLanguageCountry = useCallback((language: string): string => {
-    const map: { [key: string]: string } = {
-      English: "United States",
-      Spanish: "Spain",
-      French: "France",
-      German: "Germany",
-      Italian: "Italy",
-      Portuguese: "Portugal",
-      Russian: "Russia",
-      Chinese: "China",
-      Japanese: "Japan",
-      Korean: "South Korea",
-      Arabic: "Saudi Arabia",
-      Hindi: "India",
-      Turkish: "Turkey",
-      Dutch: "Netherlands",
-      Polish: "Poland",
-      Persian: "Iran",
-      Urdu: "Pakistan",
-      Bengali: "Bangladesh",
-      Vietnamese: "Vietnam",
-      Thai: "Thailand",
-    };
-    return map[language] || "Various";
-  }, []);
-
-  const getCountryLanguage = useCallback((country: string): string => {
-    const map: { [key: string]: string } = {
-      "United States": "English",
-      Spain: "Spanish",
-      France: "French",
-      Germany: "German",
-      Italy: "Italian",
-      Portugal: "Portuguese",
-      Russia: "Russian",
-      China: "Chinese",
-      Japan: "Japanese",
-      "South Korea": "Korean",
-      "Saudi Arabia": "Arabic",
-      India: "Hindi",
-      Turkey: "Turkish",
-      Netherlands: "Dutch",
-      Poland: "Polish",
-      Iran: "Persian",
-      Pakistan: "Urdu",
-      Bangladesh: "Bengali",
-      Vietnam: "Vietnamese",
-      Thailand: "Thai",
-    };
-    return map[country] || "Local";
-  }, []);
-
-  const getCountryCategory = useCallback((index: number): string => {
-    const categories = [
-      "News",
-      "Entertainment",
-      "Sports",
-      "Music",
-      "Movies",
-      "Education",
-      "Kids",
-      "Documentary",
-    ];
-    return categories[index % categories.length];
-  }, []);
-
-  const getRegionLanguage = useCallback((region: string): string => {
-    if (region.includes("Europe")) return "Various European";
-    if (region.includes("America")) return "English/Spanish";
-    if (region.includes("Asia")) return "Various Asian";
-    if (region.includes("Africa")) return "Various African";
-    if (region.includes("Middle East") || region.includes("Arab"))
-      return "Arabic";
-    return "Various";
-  }, []);
-
-  const getRegionCountry = useCallback((region: string): string => {
-    if (region.includes("North America")) return "United States";
-    if (region.includes("Europe")) return "Germany";
-    if (region.includes("Asia")) return "China";
-    if (region.includes("Africa")) return "South Africa";
-    if (region.includes("Middle East")) return "Saudi Arabia";
-    return "Various";
-  }, []);
-
-  const getRegionCategory = useCallback((index: number): string => {
-    const categories = [
-      "General",
-      "News",
-      "Entertainment",
-      "Sports",
-      "Culture",
-      "Education",
-      "Music",
-      "Movies",
-    ];
-    return categories[index % categories.length];
-  }, []);
 
   const updateAvailableFilters = useCallback(
     (channels: Channel[], playlistType: PlaylistType) => {
@@ -594,41 +372,57 @@ export default function IPTVStreaming() {
     []
   );
 
-  const handleCategorySelect = useCallback((category: Category) => {
-    setSelectedCategory(category);
-    setSelectedLanguage(null);
-    setSelectedCountry(null);
-    setSelectedRegion(null);
-    setSelectedPlaylist("categories");
-    setShowCategoryBrowser(false);
-  }, []);
+  const handleCategorySelect = useCallback(
+    (category: Category) => {
+      setSelectedCategory(category);
+      setSelectedLanguage(null);
+      setSelectedCountry(null);
+      setSelectedRegion(null);
+      setSelectedPlaylist("categories");
+      setShowCategoryBrowser(false);
+      loadCategoryPlaylist(category); // Load immediately
+    },
+    [loadCategoryPlaylist]
+  );
 
-  const handleLanguageSelect = useCallback((language: Language) => {
-    setSelectedLanguage(language);
-    setSelectedCategory(null);
-    setSelectedCountry(null);
-    setSelectedRegion(null);
-    setSelectedPlaylist("languages");
-    setShowLanguageBrowser(false);
-  }, []);
+  const handleLanguageSelect = useCallback(
+    (language: Language) => {
+      setSelectedLanguage(language);
+      setSelectedCategory(null);
+      setSelectedCountry(null);
+      setSelectedRegion(null);
+      setSelectedPlaylist("languages");
+      setShowLanguageBrowser(false);
+      loadLanguagePlaylist(language); // Load immediately
+    },
+    [loadLanguagePlaylist]
+  );
 
-  const handleCountrySelect = useCallback((country: Country) => {
-    setSelectedCountry(country);
-    setSelectedCategory(null);
-    setSelectedLanguage(null);
-    setSelectedRegion(null);
-    setSelectedPlaylist("countries");
-    setShowCountryBrowser(false);
-  }, []);
+  const handleCountrySelect = useCallback(
+    (country: Country) => {
+      setSelectedCountry(country);
+      setSelectedCategory(null);
+      setSelectedLanguage(null);
+      setSelectedRegion(null);
+      setSelectedPlaylist("countries");
+      setShowCountryBrowser(false);
+      loadCountryPlaylist(country); // Load immediately
+    },
+    [loadCountryPlaylist]
+  );
 
-  const handleRegionSelect = useCallback((region: Region) => {
-    setSelectedRegion(region);
-    setSelectedCategory(null);
-    setSelectedLanguage(null);
-    setSelectedCountry(null);
-    setSelectedPlaylist("regions");
-    setShowRegionBrowser(false);
-  }, []);
+  const handleRegionSelect = useCallback(
+    (region: Region) => {
+      setSelectedRegion(region);
+      setSelectedCategory(null);
+      setSelectedLanguage(null);
+      setSelectedCountry(null);
+      setSelectedPlaylist("regions");
+      setShowRegionBrowser(false);
+      loadRegionPlaylist(region); // Load immediately
+    },
+    [loadRegionPlaylist]
+  );
 
   useEffect(() => {
     if (selectedCategory) {
@@ -699,13 +493,13 @@ export default function IPTVStreaming() {
           <Select
             value={playlistValue}
             onValueChange={(value: PlaylistType) => {
-              console.log("Selected playlist:", value);
-              setSelectedFilter("all");
+              setSelectedFilter("all"); // Reset filter when changing playlist type
               setSelectedPlaylist(value);
               if (value === "categories") setShowCategoryBrowser(true);
               else if (value === "languages") setShowLanguageBrowser(true);
               else if (value === "countries") setShowCountryBrowser(true);
               else if (value === "regions") setShowRegionBrowser(true);
+              else loadPlaylist(value); // Load immediately for non-browser playlists
             }}
           >
             <SelectTrigger className="bg-gray-800 border-gray-700">
@@ -726,7 +520,6 @@ export default function IPTVStreaming() {
               ))}
             </SelectContent>
           </Select>
-
           {selectedCategory && (
             <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-red-500/30">
               <div className="flex items-center justify-between">
@@ -749,7 +542,6 @@ export default function IPTVStreaming() {
               </div>
             </div>
           )}
-
           {selectedLanguage && (
             <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-blue-500/30">
               <div className="flex items-center justify-between">
@@ -772,7 +564,6 @@ export default function IPTVStreaming() {
               </div>
             </div>
           )}
-
           {selectedCountry && (
             <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-green-500/30">
               <div className="flex items-center justify-between">
@@ -795,7 +586,6 @@ export default function IPTVStreaming() {
               </div>
             </div>
           )}
-
           {selectedRegion && (
             <div className="mt-3 bg-gray-800 rounded-lg p-3 border border-purple-500/30">
               <div className="flex items-center justify-between">
@@ -818,7 +608,6 @@ export default function IPTVStreaming() {
               </div>
             </div>
           )}
-
           {availableFilters.length > 1 &&
             !selectedCategory &&
             !selectedLanguage &&
@@ -1075,53 +864,7 @@ export default function IPTVStreaming() {
           </div>
 
           {currentChannel && (
-            <div className="bg-gray-900 p-3 md:p-4 border-t border-gray-800">
-              <div className="flex items-center gap-3 md:gap-4">
-                <img
-                  src={currentChannel.logo || "/placeholder.svg"}
-                  alt={currentChannel.name}
-                  className="w-12 h-8 md:w-16 md:h-10 object-contain bg-gray-800 rounded"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src =
-                      "/placeholder.svg?height=60&width=100&text=TV";
-                  }}
-                />
-                <div className="flex-1 min-w-0">
-                  <h2 className="text-lg md:text-xl font-bold truncate">
-                    {currentChannel.name}
-                  </h2>
-                  <div className="flex gap-1 md:gap-2 mt-1 flex-wrap">
-                    {currentChannel.category && (
-                      <Badge variant="secondary" className="text-xs">
-                        {currentChannel.category}
-                      </Badge>
-                    )}
-                    {currentChannel.country && (
-                      <Badge
-                        variant="outline"
-                        className="text-gray-300 text-xs hidden sm:flex"
-                      >
-                        <Globe className="w-3 h-3 mr-1" />
-                        {currentChannel.country}
-                      </Badge>
-                    )}
-                    {currentChannel.language && (
-                      <Badge
-                        variant="outline"
-                        className="text-gray-300 text-xs hidden md:flex"
-                      >
-                        <Languages className="w-3 h-3 mr-1" />
-                        {currentChannel.language}
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-                <Button className="bg-red-600 hover:bg-red-700 text-xs md:text-sm px-3 md:px-4">
-                  <Play className="w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
-                  Live
-                </Button>
-              </div>
-            </div>
+            <CurrentChannelInfo currentChannel={currentChannel} />
           )}
         </div>
 
