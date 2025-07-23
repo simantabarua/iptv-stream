@@ -461,9 +461,7 @@ export default function IPTVStreaming() {
               : selectedCountry
               ? `Loading ${selectedCountry.name} country`
               : selectedRegion
-              ? `Loading ${
-                  selectedRegion.region_name || "Unknown Region"
-                } region`
+              ? `Loading ${selectedRegion.region_name || "Unknown Region"} region`
               : "Fetching from iptv-org repository"}
           </p>
         </div>
@@ -854,7 +852,7 @@ export default function IPTVStreaming() {
           <div className="flex-1 bg-black relative">
             {currentChannel && (
               <VideoPlayer
-                src={currentChannel.url}
+                src={(currentChannel.url)}
                 title={currentChannel.name}
                 poster={currentChannel.logo}
               />

@@ -13,6 +13,7 @@ import {
   RotateCcw,
   Wifi,
 } from "lucide-react";
+import Hls from "hls.js";
 
 interface VideoPlayerProps {
   src: string;
@@ -22,13 +23,13 @@ interface VideoPlayerProps {
 
 declare global {
   interface Window {
-    Hls: any;
+    Hls: typeof Hls;
   }
 }
 
 export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const hlsRef = useRef<any>(null);
+  const hlsRef = useRef<Hls | null>(null); // Update type to match Hls
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState([100]);
   const [isMuted, setIsMuted] = useState(false);
@@ -40,34 +41,7 @@ export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
   } | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
-  const [hlsLoaded, setHlsLoaded] = useState(false);
 
-  // Load HLS.js dynamically
-  useEffect(() => {
-    const loadHls = async () => {
-      if (window.Hls) {
-        setHlsLoaded(true);
-        return;
-      }
-      try {
-        const script = document.createElement("script");
-        script.src =
-          "https://cdn.jsdelivr.net/npm/hls.js@1.4.12/dist/hls.min.js";
-        script.onload = () => setHlsLoaded(true);
-        script.onerror = () => {
-          console.error("Failed to load HLS.js");
-          setHlsLoaded(false);
-        };
-        document.head.appendChild(script);
-      } catch (error) {
-        console.error("Error loading HLS.js:", error);
-        setHlsLoaded(false);
-      }
-    };
-    loadHls();
-  }, []);
-
-  // Detect mobile device
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -75,12 +49,10 @@ export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Initialize video player
   useEffect(() => {
     const video = videoRef.current;
-    if (!video || !hlsLoaded) return;
+    if (!video) return;
 
-    // Clean up previous HLS instance
     if (hlsRef.current) {
       hlsRef.current.destroy();
       hlsRef.current = null;
@@ -147,7 +119,7 @@ export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
         hlsRef.current = null;
       }
     };
-  }, [src, hlsLoaded, retryCount]);
+  }, [src, retryCount]);
 
   const initializeStream = (
     video: HTMLVideoElement,
@@ -155,8 +127,8 @@ export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
     isHls: boolean
   ) => {
     try {
-      if (isHls && window.Hls && window.Hls.isSupported()) {
-        const hls = new window.Hls({
+      if (isHls && Hls.isSupported()) {
+        const hls = new Hls({
           enableWorker: true,
           lowLatencyMode: false,
           backBufferLength: 90,
@@ -183,22 +155,22 @@ export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
 
         hlsRef.current = hls;
 
-        hls.on(window.Hls.Events.MANIFEST_PARSED, () => setIsLoading(false));
-        hls.on(window.Hls.Events.ERROR, (event: any, data: any) => {
+        hls.on(Hls.Events.MANIFEST_PARSED, () => setIsLoading(false));
+        hls.on(Hls.Events.ERROR, (event: any, data: any) => {
           setIsLoading(false);
           if (data.fatal) {
             switch (data.type) {
-              case window.Hls.ErrorTypes.NETWORK_ERROR:
+              case Hls.ErrorTypes.NETWORK_ERROR:
                 setError({
                   message: "Network error loading stream",
                   type:
-                    data.details === window.Hls.ErrorDetails.MANIFEST_LOAD_ERROR
+                    data.details === Hls.ErrorDetails.MANIFEST_LOAD_ERROR
                       ? "cors"
                       : "network",
                 });
                 hls.startLoad();
                 break;
-              case window.Hls.ErrorTypes.MEDIA_ERROR:
+              case Hls.ErrorTypes.MEDIA_ERROR:
                 setError({
                   message: "Media error - stream format issue",
                   type: "media",
@@ -328,9 +300,6 @@ export default function VideoPlayer({ src, title, poster }: VideoPlayerProps) {
               <p className="text-gray-400 text-xs mt-2">
                 Retry attempt {retryCount}/3
               </p>
-            )}
-            {!hlsLoaded && (
-              <p className="text-yellow-400 text-xs mt-2">Loading HLS.js...</p>
             )}
           </div>
         </div>
